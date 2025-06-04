@@ -1,0 +1,24 @@
+/* Swiper bullet (dot) styling */
+.swiper-pagination-bullet {
+  background-color: #2dd4bf;
+  opacity: 0.5;
+  transition: 0.3s ease;
+  padding: 4px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #2dd4bf;
+  opacity: 1;
+}
+
+/* Swiper nav arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #2dd4bf;
+  transition: 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #2dd4bf;
+}

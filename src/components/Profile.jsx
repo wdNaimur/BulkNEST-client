@@ -20,7 +20,7 @@ const Profile = ({ user }) => {
           <div className="group-hover:block hidden w-62 transition-all ease-linear rounded-box z-1   absolute top-1 right-11 text-center  bg-secondary/10 backdrop-blur-md border border-base-100/20 rounded-xl py-4 px-6">
             <span className="flex items-center justify-center">
               <img
-                className="rounded-full"
+                className="rounded-full w-20 h-20 object-cover"
                 alt="profile"
                 src={`${
                   user.photoURL
