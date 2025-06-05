@@ -1,15 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import ErrorText from "../UI/ErrorText";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../AuthContexts/AuthContext";
+import { motion, useInView } from "framer-motion";
 
 const SignUpPage = () => {
   useEffect(() => {
     document.title = "BulkNEST | Sign Up";
   }, []);
-
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "0px 0px -100px 0px",
+  });
   const { createUser, setUser, updateUser, googleSignIn, user } =
     useContext(AuthContext);
 
@@ -18,7 +23,10 @@ const SignUpPage = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
+  const [showPasswordRules, setShowPasswordRules] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
   const handleTogglePassword = () => setShowPassword(!showPassword);
 
@@ -79,34 +87,45 @@ const SignUpPage = () => {
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: url });
             toast.success("Successfully Created Account!");
-            navigate(`${location.state ? location.state : "/"}`);
+            setShowPasswordRules(false); // hide password rules after success
+            navigate(from);
           })
-          .catch((error) => {
+          .catch(() => {
             setUser(user);
-            toast.error("Failed to Created Account!");
+            toast.error("Failed to Create Account!");
           });
       })
-      .catch((error) => {
-        toast.error("Failed to Created Account!");
+      .catch(() => {
+        toast.error("Failed to Create Account!");
       });
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        const user = res.user;
         toast.success("Successfully Created Account!");
-        navigate(`${location.state ? location.state : "/"}`);
+        navigate(from);
       })
-      .catch((error) => {
-        toast.error("Failed to Created Account!");
+      .catch(() => {
+        toast.error("Failed to Create Account!");
       });
   };
-  console.log(user);
+
   const passwordChecks = validatePassword(passwordInput);
+
   if (user) {
     return (
-      <div className="container mx-auto px-4 font-poppins">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+            : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+        }
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="container mx-auto px-4 font-poppins"
+      >
         <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
           <h1 className="text-4xl font-grand-hotel text-center text-primary">
             Please Logout First
@@ -116,11 +135,21 @@ const SignUpPage = () => {
             first.
           </p>
         </div>
-      </div>
+      </motion.div>
     );
   } else {
     return (
-      <div className="container mx-auto px-4 flex gap-10 items-center justify-center select-none my-10 font-poppins">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+            : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+        }
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="container mx-auto px-4 flex gap-10 items-center justify-center select-none my-10 font-poppins"
+      >
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <h2 className="text-4xl font-bold lg:text-5xl text-primary">
@@ -167,7 +196,11 @@ const SignUpPage = () => {
                   className="input border-none bg-primary/10 w-full focus:outline-primary/40"
                   placeholder="Password"
                   value={passwordInput}
-                  onChange={(e) => setPasswordInput(e.target.value)}
+                  onChange={(e) => {
+                    setPasswordInput(e.target.value);
+                    setShowPasswordRules(true);
+                    setErrorPassword("");
+                  }}
                 />
                 <a
                   onClick={handleTogglePassword}
@@ -180,50 +213,34 @@ const SignUpPage = () => {
                   )}
                 </a>
               </div>
-              {/* Password Rules */}
-              <div className="text-xs mt-1 ml-1 space-y-1 text-left">
-                <p
-                  className={
-                    passwordChecks.lengthValid
-                      ? "text-green-600"
-                      : "text-gray-400"
-                  }
-                >
-                  ✓ 8–16 characters in length
-                </p>
-                <p
-                  className={
-                    passwordChecks.hasLower ? "text-green-600" : "text-gray-400"
-                  }
-                >
-                  ✓ Lower case letter
-                </p>
-                <p
-                  className={
-                    passwordChecks.hasUpper ? "text-green-600" : "text-gray-400"
-                  }
-                >
-                  ✓ Upper case letter
-                </p>
-                <p
-                  className={
-                    passwordChecks.hasNumber
-                      ? "text-green-600"
-                      : "text-gray-400"
-                  }
-                >
-                  ✓ Numeric character
-                </p>
-                <p
-                  className={
-                    passwordChecks.hasSpecial
-                      ? "text-green-600"
-                      : "text-gray-400"
-                  }
-                >
-                  ✓ Special character
-                </p>
-              </div>
+
+              {/* Password Rules (show only one error at a time) */}
+              {showPasswordRules && (
+                <div className="text-xs mt-1 ml-1 text-left text-red-500">
+                  {!passwordChecks.lengthValid && (
+                    <p>✗ Password must be 8–16 characters</p>
+                  )}
+                  {passwordChecks.lengthValid && !passwordChecks.hasLower && (
+                    <p>✗ Must include a lowercase letter</p>
+                  )}
+                  {passwordChecks.lengthValid &&
+                    passwordChecks.hasLower &&
+                    !passwordChecks.hasUpper && (
+                      <p>✗ Must include an uppercase letter</p>
+                    )}
+                  {passwordChecks.lengthValid &&
+                    passwordChecks.hasLower &&
+                    passwordChecks.hasUpper &&
+                    !passwordChecks.hasNumber && <p>✗ Must include a number</p>}
+                  {passwordChecks.lengthValid &&
+                    passwordChecks.hasLower &&
+                    passwordChecks.hasUpper &&
+                    passwordChecks.hasNumber &&
+                    !passwordChecks.hasSpecial && (
+                      <p>✗ Must include a special character</p>
+                    )}
+                </div>
+              )}
               {errorPassword && <ErrorText>{errorPassword}</ErrorText>}
 
               {/* Confirm Password */}
@@ -286,17 +303,17 @@ const SignUpPage = () => {
                 <p>
                   Already have an Account?{" "}
                   <Link
-                    to="/signIn"
-                    className="link link-hover text-primary font-semibold"
+                    to="/login"
+                    className="text-primary underline underline-offset-2 cursor-pointer"
                   >
-                    Sign In
+                    Login
                   </Link>
                 </p>
               </div>
             </form>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 };

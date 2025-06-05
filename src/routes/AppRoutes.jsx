@@ -4,6 +4,8 @@ import HomePage from "../pages/HomePage";
 import ErrorPage from "../layouts/ErrorPage";
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
+import AddProductPage from "../pages/AddProductPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUpPage />,
+      },
+      {
+        path: "/addProduct",
+        element: (
+          <PrivateRoute>
+            <AddProductPage />
+          </PrivateRoute>
+        ),
       },
     ],
   },

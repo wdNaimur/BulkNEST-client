@@ -25,7 +25,7 @@ const Banner = () => {
         {/* Slide 1 */}
         <SwiperSlide>
           <div
-            className="hero lg:min-h-[60vh] min-h-96 object-cover"
+            className="hero min-h-[590px] object-cover"
             style={{
               backgroundImage:
                 "url('https://i.ibb.co/3mjXpY0k/Hero-Image.png')",
@@ -55,7 +55,7 @@ const Banner = () => {
         {/* Slide 2 */}
         <SwiperSlide>
           <div
-            className="hero lg:min-h-[60vh] min-h-96 object-cover"
+            className="hero min-h-[590px] object-cover"
             style={{
               backgroundImage:
                 "url('https://i.ibb.co/5WLN6s1f/Hero-Image.png')",
@@ -85,7 +85,7 @@ const Banner = () => {
         {/* Slide 3 */}
         <SwiperSlide>
           <div
-            className="hero lg:min-h-[60vh] min-h-96 object-cover"
+            className="hero min-h-[590px] object-cover"
             style={{
               backgroundImage:
                 "url('https://i.ibb.co/yckQwK2C/Hero-Image.png')",

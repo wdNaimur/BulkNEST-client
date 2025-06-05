@@ -7,7 +7,7 @@ import Profile from "./Profile";
 import { IoCartOutline } from "react-icons/io5";
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, userSignOut } = useContext(AuthContext);
 
   const handleNavClick = () => {
     const drawer = document.getElementById("my-drawer-2");
@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   const handleSignOut = () => {
-    signOutUser()
+    userSignOut()
       .then(() => {
         toast.success("SignOut Successfully");
         handleNavClick();
@@ -48,6 +48,7 @@ const Navbar = () => {
     ? [
         { path: "/", label: "Home" },
         { path: "/categories", label: "Categories" },
+        { path: "/addProduct", label: "Add product" },
       ]
     : [
         { path: "/", label: "Home" },
