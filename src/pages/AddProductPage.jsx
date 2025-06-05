@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 import { use } from "react";
 import { AuthContext } from "../AuthContexts/AuthContext";
 
 const AddProductPage = () => {
+  const navigate = useNavigate();
   const { user } = use(AuthContext);
 
   useEffect(() => {
@@ -20,8 +23,27 @@ const AddProductPage = () => {
     productData.min_sell_quantity = parseInt(productData.min_sell_quantity);
     productData.rating = parseInt(productData.rating);
     productData.userEmail = user.email;
-    productData.userName = user.displayName;
-    console.log(productData);
+    productData.review = [];
+
+    fetch(`${import.meta.env.VITE_API_URL}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Product Added Successfully!");
+          //LaterTask
+          // form.reset();
+          // navigate("/dashboard/my-products");
+        } else {
+          toast.error("Failed to add product.");
+        }
+      })
+      .catch(() => toast.error("Server Error!"));
   };
 
   return (
@@ -39,7 +61,7 @@ const AddProductPage = () => {
             <label className="label text-secondary mb-1">Image URL</label>
             <input
               name="image"
-              type="text"
+              type="url"
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
               placeholder="e.g., https://example.com/product.jpg"
               required
@@ -145,17 +167,6 @@ const AddProductPage = () => {
             className="textarea border-none bg-primary/10 w-full focus:outline-primary/40 resize-none"
             placeholder="e.g., A lightweight, ergonomic wireless mouse with USB receiver..."
             required
-          ></textarea>
-        </div>
-
-        <div className="form-control">
-          <label className="label text-secondary mb-1">
-            Product Content Info
-          </label>
-          <textarea
-            name="productContent"
-            className="textarea border-none bg-primary/10 w-full focus:outline-primary/40 resize-none"
-            placeholder="Include detailed product information, features, usage instructions, etc."
           ></textarea>
         </div>
 
