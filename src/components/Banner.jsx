@@ -43,7 +43,7 @@ const Banner = () => {
                 </p>
                 <Link
                   to="/products/electronics"
-                  className="btn btn-primary text-white"
+                  className="btn btn-primary text-base-100"
                 >
                   Shop Electronics
                 </Link>
@@ -73,7 +73,7 @@ const Banner = () => {
                 </p>
                 <Link
                   to="/products/apparel"
-                  className="btn btn-primary text-white"
+                  className="btn btn-primary text-base-100"
                 >
                   Explore Deals
                 </Link>
@@ -103,7 +103,7 @@ const Banner = () => {
                 </p>
                 <Link
                   to="/products/industrial"
-                  className="btn btn-primary text-white"
+                  className="btn btn-primary text-base-100"
                 >
                   Request Quote
                 </Link>

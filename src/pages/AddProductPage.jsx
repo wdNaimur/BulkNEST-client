@@ -47,7 +47,7 @@ const AddProductPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10 max-w-5xl">
+    <div className="container mx-auto px-4 py-10">
       <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">
         <h2 className="text-4xl font-bold text-primary">Add Product</h2>
         <p className="opacity-70">Fill in the product details below.</p>

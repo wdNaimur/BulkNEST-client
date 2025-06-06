@@ -6,11 +6,14 @@ import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import AddProductPage from "../pages/AddProductPage";
 import PrivateRoute from "./PrivateRoute";
+import axios from "axios";
+import AllProductsPage from "../pages/AllProductsPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout />,
+
     errorElement: <ErrorPage />,
     children: [
       {
@@ -30,6 +33,15 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProductPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/allProduct",
+        loader: () => axios(`${import.meta.env.VITE_API_URL}/products`),
+        element: (
+          <PrivateRoute>
+            <AllProductsPage />
           </PrivateRoute>
         ),
       },
