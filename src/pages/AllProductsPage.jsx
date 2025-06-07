@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 
 const AllProductsPage = () => {
   const data = useLoaderData();
-  const [products, setProducts] = useState(data?.data || []);
+  const products = data?.data || [];
 
   console.log(data.data);
   return (
@@ -13,7 +13,7 @@ const AllProductsPage = () => {
         <h2 className="text-4xl font-bold text-primary">All Products</h2>
         <p className="opacity-70">Explore all available products.</p>
       </div>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-center items-center gap-5">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

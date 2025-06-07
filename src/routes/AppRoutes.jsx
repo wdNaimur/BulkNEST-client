@@ -8,6 +8,8 @@ import AddProductPage from "../pages/AddProductPage";
 import PrivateRoute from "./PrivateRoute";
 import axios from "axios";
 import AllProductsPage from "../pages/AllProductsPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage";
+import Loader from "../UI/Loader";
 
 const router = createBrowserRouter([
   {
@@ -38,10 +40,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/allProduct",
+        hydrateFallbackElement: <Loader />,
         loader: () => axios(`${import.meta.env.VITE_API_URL}/products`),
         element: (
           <PrivateRoute>
             <AllProductsPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/product/:id",
+        hydrateFallbackElement: <Loader />,
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/product/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ProductDetailsPage />
           </PrivateRoute>
         ),
       },
