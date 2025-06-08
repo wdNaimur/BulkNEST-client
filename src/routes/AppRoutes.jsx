@@ -10,6 +10,8 @@ import axios from "axios";
 import AllProductsPage from "../pages/AllProductsPage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import Loader from "../UI/Loader";
+import MyProductPage from "../pages/MyProductPage";
+import CartPage from "../pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,28 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AllProductsPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myProduct/:email",
+        hydrateFallbackElement: <Loader />,
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/myProducts/${params.email}`),
+        element: (
+          <PrivateRoute>
+            <MyProductPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/cart/:email",
+        hydrateFallbackElement: <Loader />,
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/orders/${params.email}`),
+        element: (
+          <PrivateRoute>
+            <CartPage />
           </PrivateRoute>
         ),
       },

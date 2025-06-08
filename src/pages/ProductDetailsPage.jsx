@@ -40,12 +40,12 @@ const ProductDetailsPage = () => {
     const orderInfo = {
       productId: product._id,
       quantity,
+      orderedFrom,
       buyerDetails: {
         buyerName,
         buyerEmail,
         buyerPhone,
         buyerAddress,
-        orderedFrom,
       },
     };
     // send data to backend && update data in backend of stock && Stock Minus

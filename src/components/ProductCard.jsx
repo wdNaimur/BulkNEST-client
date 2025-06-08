@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
   } = product;
 
   return (
-    <div className="w-full bg-amber-200">
+    <div className="w-full">
       <div className="rounded-box shadow-md w-full bg-base-100 text-secondary flex flex-col mx-auto h-full">
         {/* Image */}
         <div className="relative">

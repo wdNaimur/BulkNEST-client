@@ -14,7 +14,7 @@ const HomeLayout = () => {
     <div className="flex bg-base-200 min-h-screen font-outfit">
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
-      <main className="flex-1 lg:mt-[65px] mt-[64px] ">
+      <main className="flex-1 lg:mt-[65px] mt-[64px] overflow-x-auto">
         <Outlet />
       </main>
       {/* footer  */}
