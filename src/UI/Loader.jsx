@@ -11,7 +11,7 @@ const Loader = () => {
         {letters.map((letter, index) => (
           <motion.span
             key={index}
-            className="loader-letter"
+            className="loader-letter text-secondary"
             initial={{ opacity: 0.2 }}
             animate={{ opacity: 1 }}
             transition={{

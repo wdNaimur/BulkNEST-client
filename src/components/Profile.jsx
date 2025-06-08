@@ -17,7 +17,7 @@ const Profile = ({ user }) => {
     <div>
       <div className="dropdown dropdown-end flex gap-2">
         <div className="relative flex items-center justify-center gap-2 group">
-          <div className="group-hover:block hidden w-62 transition-all ease-linear rounded-box z-1   absolute top-1 right-11 text-center  bg-secondary/10 backdrop-blur-md border border-base-100/20 rounded-xl py-4 px-6">
+          <div className="group-hover:block hidden w-62 transition-all ease-linear rounded-box z-1   absolute top-1 right-11 text-center  bg-secondary/10 backdrop-blur-md border border-base-100/20 py-4 px-6">
             <span className="flex items-center justify-center">
               <img
                 className="rounded-full w-20 h-20 object-cover"

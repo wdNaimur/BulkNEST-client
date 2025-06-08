@@ -12,6 +12,9 @@ import ProductDetailsPage from "../pages/ProductDetailsPage";
 import Loader from "../UI/Loader";
 import MyProductPage from "../pages/MyProductPage";
 import CartPage from "../pages/CartPage";
+import UpdateProductPage from "../pages/UpdateProductPage";
+import CategoriesPage from "../pages/CategoriesPage";
+import SingleCategoryPage from "../pages/SingleCategoryPage";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,19 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/categories",
+        element: <CategoriesPage />,
+      },
+      {
+        path: "/categories/:category",
+        element: (
+          <PrivateRoute>
+            <SingleCategoryPage />
+          </PrivateRoute>
+        ),
+      },
+
+      {
         path: "/allProduct",
         hydrateFallbackElement: <Loader />,
         loader: () => axios(`${import.meta.env.VITE_API_URL}/products`),
@@ -50,6 +66,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "/myProduct/:email",
         hydrateFallbackElement: <Loader />,
@@ -80,6 +97,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ProductDetailsPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/updateProduct/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProductPage />
           </PrivateRoute>
         ),
       },

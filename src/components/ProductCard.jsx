@@ -39,9 +39,12 @@ const ProductCard = ({ product }) => {
               <span className="text-base-100">{rating} / 5</span>
             </p>
           </span>
-          <button className="btn btn-circle bg-primary border-none opacity-50 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 right-2 text-lg text-white">
+          <Link
+            to={`/updateProduct/${_id}`}
+            className="btn btn-circle bg-primary border-none opacity-50 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 right-2 text-lg text-white"
+          >
             <MdEdit />
-          </button>
+          </Link>
         </div>
 
         {/* Card Content */}

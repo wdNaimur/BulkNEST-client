@@ -53,7 +53,7 @@ const Navbar = () => {
     : [
         { path: "/", label: "Home" },
         { path: "/categories", label: "Categories" },
-        { path: "/allProduct", label: "All product" },
+        { path: "/allProduct", label: "All products" },
         { path: "/addProduct", label: "Add product" },
         { path: `/myProduct/${user.email}`, label: "My product" },
       ];
