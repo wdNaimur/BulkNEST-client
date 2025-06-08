@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { FaStar } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { Rating } from "react-simple-star-rating";
 
 const ProductCard = ({ product }) => {
   const {
@@ -35,10 +36,18 @@ const ProductCard = ({ product }) => {
           </span>
           <span className="absolute bottom-2 right-3">
             <p className="text-xs uppercase font-medium tracking-wide text-base-100 px-2 py-1 rounded-box flex items-center gap-1 bg-secondary">
-              <FaStar className="text-yellow-500" />
-              <span className="text-base-100">{rating} / 5</span>
+              <Rating
+                initialValue={rating}
+                readonly
+                size={18}
+                allowFraction
+                SVGstyle={{ display: "inline-block" }}
+                fillColor="#FFA500"
+                emptyColor="#CCCCCC"
+              />
             </p>
           </span>
+
           <Link
             to={`/updateProduct/${_id}`}
             className="btn btn-circle bg-primary border-none opacity-50 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 right-2 text-lg text-white"
