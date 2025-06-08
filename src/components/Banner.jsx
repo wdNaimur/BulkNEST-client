@@ -42,7 +42,7 @@ const Banner = () => {
                   Limited-time offer for verified buyers.
                 </p>
                 <Link
-                  to="/products/electronics"
+                  to="categories/Electronics%20&%20Gadgets"
                   className="btn btn-primary text-base-100"
                 >
                   Shop Electronics
@@ -72,7 +72,7 @@ const Banner = () => {
                   Bulk only. While stock lasts.
                 </p>
                 <Link
-                  to="/products/apparel"
+                  to="categories/Fashion%20&%20Apparel"
                   className="btn btn-primary text-base-100"
                 >
                   Explore Deals
@@ -102,7 +102,7 @@ const Banner = () => {
                   custom quote today!
                 </p>
                 <Link
-                  to="/products/industrial"
+                  to="categories/Industrial%20Machinery%20&%20Tools"
                   className="btn btn-primary text-base-100"
                 >
                   Request Quote

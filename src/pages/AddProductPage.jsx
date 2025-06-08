@@ -54,7 +54,7 @@ const AddProductPage = () => {
       </div>
       <form
         onSubmit={handleAddProduct}
-        className="bg-base-100 p-8 rounded-box mt-6 space-y-6 shadow-md"
+        className="bg-base-100 p-8 rounded-box mt-8 space-y-6 shadow-md"
       >
         <div className="grid md:grid-cols-2 gap-6">
           <div className="form-control w-full">
