@@ -58,18 +58,17 @@ const router = createBrowserRouter([
 
       {
         path: "/allProduct",
-        hydrateFallbackElement: <Loader />,
         loader: () => axios(`${import.meta.env.VITE_API_URL}/products`),
         element: (
           <PrivateRoute>
             <AllProductsPage />
           </PrivateRoute>
         ),
+        hydrateFallbackElement: <Loader />,
       },
 
       {
         path: "/myProduct/:email",
-        hydrateFallbackElement: <Loader />,
         loader: ({ params }) =>
           axios(`${import.meta.env.VITE_API_URL}/myProducts/${params.email}`),
         element: (
@@ -77,10 +76,10 @@ const router = createBrowserRouter([
             <MyProductPage />
           </PrivateRoute>
         ),
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: "/cart/:email",
-        hydrateFallbackElement: <Loader />,
         loader: ({ params }) =>
           axios(`${import.meta.env.VITE_API_URL}/orders/${params.email}`),
         element: (
@@ -88,10 +87,10 @@ const router = createBrowserRouter([
             <CartPage />
           </PrivateRoute>
         ),
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: "/product/:id",
-        hydrateFallbackElement: <Loader />,
         loader: ({ params }) =>
           axios(`${import.meta.env.VITE_API_URL}/product/${params.id}`),
         element: (
@@ -99,6 +98,7 @@ const router = createBrowserRouter([
             <ProductDetailsPage />
           </PrivateRoute>
         ),
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: "/updateProduct/:id",

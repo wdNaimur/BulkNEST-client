@@ -6,6 +6,7 @@
 }
 .loader-data-fetch-container {
   height: 100vh;
+  padding-top: 63px;
   display: flex;
   justify-content: center;
 }

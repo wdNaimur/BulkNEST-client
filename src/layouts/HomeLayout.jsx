@@ -1,12 +1,14 @@
 import React, { use } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import Loader from "../UI/Loader";
 import { Toaster } from "react-hot-toast";
+import LoaderDataFetch from "../UI/LoaderDataFetch";
 
 const HomeLayout = () => {
   const { loading } = use(AuthContext);
+  const { state } = useNavigation();
   if (loading) {
     return <Loader />;
   }
@@ -15,7 +17,7 @@ const HomeLayout = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <main className="flex-1 lg:mt-[65px] mt-[64px] overflow-x-auto">
-        <Outlet />
+        {state == "loading" ? <LoaderDataFetch /> : <Outlet />}
       </main>
       {/* footer  */}
     </div>
