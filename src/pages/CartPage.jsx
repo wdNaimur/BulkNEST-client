@@ -1,10 +1,30 @@
-import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router";
+import React, { use, useEffect, useState } from "react";
+import { Link } from "react-router";
 import OrderTable from "../components/OrderTable";
+import { AuthContext } from "../AuthContexts/AuthContext";
+import LoaderDataFetch from "../UI/LoaderDataFetch";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const CartPage = () => {
-  const initialOrder = useLoaderData();
-  const [allOrder, setAllOrder] = useState(initialOrder.data);
+  const { user } = use(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const [allOrder, setAllOrder] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  useEffect(() => {
+    setLoading(true);
+    axiosSecure(`/orders/${user.email}`)
+      .then((data) => {
+        setAllOrder(data?.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [user.email, axiosSecure]);
+  if (loading) {
+    return <LoaderDataFetch />;
+  }
   return (
     <section className="container mx-auto px-4 py-10">
       <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">

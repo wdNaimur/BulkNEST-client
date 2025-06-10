@@ -31,7 +31,7 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (fromPrivateRoute && !user) {
-      toast.error("Access Denied. Please sign in.");
+      toast.error("You must be signed in to view this page.");
       setFromPrivateRoute(false);
     }
   }, [fromPrivateRoute, user]);

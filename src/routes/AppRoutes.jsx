@@ -68,26 +68,20 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/myProduct/:email",
-        loader: ({ params }) =>
-          axios(`${import.meta.env.VITE_API_URL}/myProducts/${params.email}`),
+        path: "/myProduct",
         element: (
           <PrivateRoute>
             <MyProductPage />
           </PrivateRoute>
         ),
-        hydrateFallbackElement: <Loader />,
       },
       {
-        path: "/cart/:email",
-        loader: ({ params }) =>
-          axios(`${import.meta.env.VITE_API_URL}/orders/${params.email}`),
+        path: "/cart",
         element: (
           <PrivateRoute>
             <CartPage />
           </PrivateRoute>
         ),
-        hydrateFallbackElement: <Loader />,
       },
       {
         path: "/product/:id",

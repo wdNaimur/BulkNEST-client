@@ -36,7 +36,6 @@ const AddProductPage = () => {
       .then((data) => {
         if (data.insertedId) {
           toast.success("Product Added Successfully!");
-          //LaterTask
           form.reset();
           navigate(`/myProduct/${user.email}`);
         } else {

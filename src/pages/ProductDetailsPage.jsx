@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { use, useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +10,7 @@ const ProductDetailsPage = () => {
   const data = useLoaderData();
   const { user } = use(AuthContext);
   const product = data.data;
-
+  const navigate = useNavigate();
   const minimumQuantity = product.min_sell_quantity;
   const initialStock = product.main_quantity;
 
@@ -53,8 +53,11 @@ const ProductDetailsPage = () => {
       .post(`${import.meta.env.VITE_API_URL}/orders`, orderInfo)
       .then((res) => {
         console.log(res.data);
-        setStock((prev) => prev - quantity);
-        toast.success("Order Placed Successfully");
+        if (res.data.success) {
+          setStock((prev) => prev - quantity);
+          toast.success("Order Placed Successfully");
+          navigate("/cart");
+        }
       })
       .catch((err) => {
         console.error(err);

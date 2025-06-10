@@ -41,7 +41,7 @@ const UpdateProductPage = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           toast.success("Product Updated Successfully!");
-          navigate(`/myProduct/${user.email}`);
+          navigate(`/myProduct`);
         } else {
           toast.error("No changes made or failed to update.");
         }

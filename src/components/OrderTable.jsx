@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
 const OrderTable = ({ order, allOrder, setAllOrder }) => {
-  console.log(order);
   const orderDate = new Date(order.date);
   const formattedDate = orderDate.toLocaleDateString("en-US");
   const formattedTime = orderDate.toLocaleTimeString("en-US", {
