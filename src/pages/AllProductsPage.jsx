@@ -13,11 +13,15 @@ const AllProductsPage = () => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     setLoading(true);
-    axiosSecure(`/products/${user.email}`).then((data) => {
-      setAllProducts(data?.data);
-      setDisplayedProducts(data?.data);
-      setLoading(false);
-    });
+    axiosSecure(`/products/${user.email}`)
+      .then((data) => {
+        setAllProducts(data?.data);
+        setDisplayedProducts(data?.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [user.email, axiosSecure]);
 
   const handleAvailableProducts = () => {

@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 import ProductCard from "../components/ProductCard";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { AuthContext } from "../AuthContexts/AuthContext";
 
 const SingleCategoryPage = () => {
   const { category } = useParams();
+  const { user } = use(AuthContext);
   const [products, setProducts] = useState(null);
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
-    document.title = "BulkNEST | Update Product";
-    fetch(`${import.meta.env.VITE_API_URL}/products/${category}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch(() => toast.error("Failed to fetch product data"));
-  }, [category]);
+    axiosSecure(`/categories/${category}?email=${user?.email}`)
+      .then((data) => {
+        console.log(data);
+        setProducts(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Failed to fetch product data");
+      });
+  }, [axiosSecure, category, user?.email]);
+
   console.log(category, products);
   if (!products) return <LoaderDataFetch />;
   return (
@@ -29,7 +38,7 @@ const SingleCategoryPage = () => {
           ))}
         </div>
       ) : (
-        <div>no product found</div>
+        <div className="text-center pt-10">no product found</div>
       )}
     </section>
   );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { use } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
 
@@ -9,31 +9,42 @@ const axiosInstance = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { user, userSignOut } = use(AuthContext);
-  const token = user?.accessToken;
-  //intercept  requests
-  axiosInstance.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  });
-  //intercept responses
-  axiosInstance.interceptors.response.use(
-    (res) => res,
-    (error) => {
-      if (error.status === 401 || error.status === 403) {
-        //logout
-        userSignOut()
-          .then(() => {
-            toast.error(
-              `You are logged out because of an error with ${error.status} code.`
-            );
-          })
-          .catch((error) => console.log(error));
+  const { user, userSignOut } = useContext(AuthContext);
+
+  useEffect(() => {
+    // Request interceptor
+    const requestInterceptor = axiosInstance.interceptors.request.use(
+      (config) => {
+        if (user?.accessToken) {
+          config.headers.Authorization = `Bearer ${user.accessToken}`;
+        }
+        return config;
       }
-      console.log(error);
-      return Promise.reject(error);
-    }
-  );
+    );
+
+    // Response interceptor
+    const responseInterceptor = axiosInstance.interceptors.response.use(
+      (res) => res,
+      (error) => {
+        const status = error?.response?.status;
+        if (status === 401 || status === 403) {
+          toast.error(`You are logged out due to ${status} error.`);
+          // userSignOut()
+          //   .then(() => {
+          //     toast.error(`You are logged out due to ${status} error.`);
+          //   })
+          //   .catch((err) => console.error(err));
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    // Cleanup to prevent duplicate interceptors
+    return () => {
+      axiosInstance.interceptors.request.eject(requestInterceptor);
+      axiosInstance.interceptors.response.eject(responseInterceptor);
+    };
+  }, [user?.accessToken, userSignOut]);
   return axiosInstance;
 };
 
