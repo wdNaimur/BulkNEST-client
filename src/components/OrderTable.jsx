@@ -1,9 +1,11 @@
-import React from "react";
+import React, { use } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { AuthContext } from "../AuthContexts/AuthContext";
 
 const OrderTable = ({ order, allOrder, setAllOrder }) => {
   const orderDate = new Date(order.date);
@@ -13,6 +15,8 @@ const OrderTable = ({ order, allOrder, setAllOrder }) => {
     minute: "2-digit",
     hour12: true,
   });
+  const axiosSecure = useAxiosSecure();
+  const { user } = use(AuthContext);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -36,16 +40,19 @@ const OrderTable = ({ order, allOrder, setAllOrder }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${import.meta.env.VITE_API_URL}/orders/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
+        axiosSecure
+          .delete(`/orders/${id}?email=${user?.email}`)
           .then((data) => {
-            if (data.deletedCount) {
-              toast.success("Order deleted successfully!");
+            if (data.data.deletedCount) {
               const remaining = allOrder.filter((item) => item._id !== id);
               setAllOrder(remaining);
+              toast.success("Order deleted successfully!");
+            } else {
+              toast.error("Failed to delete Order!");
             }
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
     });
