@@ -1,21 +1,17 @@
 import React, { use, useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
 import { AuthContext } from "../AuthContexts/AuthContext";
-import axios from "axios";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
+import ProductCard from "../components/ProductCard";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyProductPage = () => {
   const { user } = use(AuthContext);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("token");
-    axios(`${import.meta.env.VITE_API_URL}/myProducts/${user?.email}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    axiosSecure(`/myProducts/${user?.email}`)
       .then((data) => {
         setProducts(data?.data);
         setLoading(false);
@@ -24,7 +20,7 @@ const MyProductPage = () => {
         console.log(err);
         setLoading(false);
       });
-  }, [user.email]);
+  }, [user.email, axiosSecure]);
   console.log(products);
   if (loading) {
     return <LoaderDataFetch />;

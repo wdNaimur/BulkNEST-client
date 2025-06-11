@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-import { FaStar } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
 
