@@ -40,12 +40,16 @@ const FeaturedCategories = () => {
         <h2 className="text-4xl font-bold text-primary">All Categories</h2>
         <p className="opacity-70">See and Visit all categories</p>
       </div>
-      <div className="flex flex-row flex-wrap justify-center gap-4 mt-8">
+
+      <div className="flex flex-wrap justify-center gap-4 mt-8 px-1">
         {featuredCategories.map((cat, index) => (
-          <Link to={`${cat.category}`}>
+          <Link
+            to={`${cat.category}`}
+            key={index}
+            className="basis-full sm:basis-64"
+          >
             <motion.div
-              key={index}
-              className="relative px-4 pb-4 rounded-2xl w-60 cursor-pointer bg-primary group overflow-hidden h-full"
+              className="relative px-4 pb-4 rounded-2xl cursor-pointer bg-primary group overflow-hidden h-full"
               initial="rest"
               whileHover="hover"
               animate="rest"
@@ -71,7 +75,7 @@ const FeaturedCategories = () => {
               <div className="relative z-0 flex flex-col justify-between h-full">
                 <div>
                   <div className="my-4">
-                    <div className="p-6 rounded-full bg-base-100/30 w-fit">
+                    <div className="p-6 rounded-full bg-base-100/30 w-fit mx-auto">
                       <img
                         src={cat.image}
                         alt={cat.category}
@@ -79,7 +83,7 @@ const FeaturedCategories = () => {
                       />
                     </div>
                   </div>
-                  <h3 className="text-3xl font-bold text-base-100">
+                  <h3 className="text-3xl font-bold text-base-100 text-center">
                     {cat.category}
                   </h3>
                 </div>
