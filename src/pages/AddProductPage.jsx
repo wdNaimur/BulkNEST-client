@@ -3,10 +3,12 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { use } from "react";
 import { AuthContext } from "../AuthContexts/AuthContext";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddProductPage = () => {
   const navigate = useNavigate();
   const { user } = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     document.title = "BulkNEST | Add Product";
@@ -25,24 +27,21 @@ const AddProductPage = () => {
     productData.userEmail = user.email;
     productData.review = [];
 
-    fetch(`${import.meta.env.VITE_API_URL}/products`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    axiosSecure
+      .post(`/products/${user.email}`, productData)
+      .then((res) => {
+        if (res.data.insertedId) {
           toast.success("Product Added Successfully!");
           form.reset();
-          navigate(`/myProduct/${user.email}`);
+          navigate(`/myProduct`);
         } else {
           toast.error("Failed to add product.");
         }
       })
-      .catch(() => toast.error("Server Error!"));
+      .catch((err) => {
+        console.error(err);
+        toast.error("Server Error!");
+      });
   };
 
   return (
