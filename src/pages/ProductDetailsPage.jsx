@@ -4,7 +4,6 @@ import { TiTick } from "react-icons/ti";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
-import axios from "axios";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 

@@ -3,19 +3,20 @@ import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const UpdateProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     document.title = "BulkNEST | Update Product";
-    fetch(`${import.meta.env.VITE_API_URL}/product/${id}`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data))
+    axiosSecure(`/product/${id}?email=${user?.email}`)
+      .then((data) => setProduct(data.data))
       .catch(() => toast.error("Failed to fetch product data"));
-  }, [id]);
+  }, [id, axiosSecure, user.email]);
 
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
@@ -30,16 +31,10 @@ const UpdateProductPage = () => {
     updatedData.userEmail = user.email;
     console.log(updatedData);
 
-    fetch(`${import.meta.env.VITE_API_URL}/product/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => res.json())
+    axiosSecure
+      .patch(`/product/${id}?email=${user?.email}`, updatedData)
       .then((data) => {
-        if (data.modifiedCount > 0) {
+        if (data?.data?.modifiedCount > 0) {
           toast.success("Product Updated Successfully!");
           navigate(`/myProduct`);
         } else {
