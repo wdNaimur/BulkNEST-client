@@ -5,23 +5,23 @@ import { Link } from "react-router";
 const featuredCategories = [
   {
     category: "Electronics & Gadgets",
-    image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    image: "https://i.ibb.co/39XxnkVN/Electronics-Gadgets.png",
   },
   {
     category: "Home & Kitchen Appliances",
-    image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    image: "https://i.ibb.co/vCVYGxw4/Home-Kitchen-Appliances.png",
   },
   {
     category: "Fashion & Apparel",
-    image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    image: "https://i.ibb.co/SXsbbCkd/Fashion-Apparel.png",
   },
   {
     category: "Industrial Machinery & Tools",
-    image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    image: "https://i.ibb.co/0pLGHFSd/Industrial-Machinery-Tools.png",
   },
   {
     category: "Health & Beauty",
-    image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    image: "https://i.ibb.co/j9cj50DV/Health-Beauty.png",
   },
   {
     category: "Automotive Parts & Accessories",
@@ -29,7 +29,7 @@ const featuredCategories = [
   },
   {
     category: "Office Supplies & Stationery",
-    image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    image: "https://i.ibb.co/nqqh5S3k/Office-Supplies-Stationery.png",
   },
 ];
 
@@ -45,7 +45,7 @@ const FeaturedCategories = () => {
           <Link to={`${cat.category}`}>
             <motion.div
               key={index}
-              className="relative px-4 pb-4 rounded-2xl w-60 cursor-pointer bg-secondary group overflow-hidden h-full"
+              className="relative px-4 pb-4 rounded-2xl w-60 cursor-pointer bg-primary group overflow-hidden h-full"
               initial="rest"
               whileHover="hover"
               animate="rest"
@@ -71,11 +71,13 @@ const FeaturedCategories = () => {
               <div className="relative z-0 flex flex-col justify-between h-full">
                 <div>
                   <div className="my-4">
-                    <img
-                      src={cat.image}
-                      alt={cat.category}
-                      className="h-22 bg-base-100 p-4 rounded-full object-contain"
-                    />
+                    <div className="p-6 rounded-full bg-base-100/30 w-fit">
+                      <img
+                        src={cat.image}
+                        alt={cat.category}
+                        className="w-24 h-24 object-fit"
+                      />
+                    </div>
                   </div>
                   <h3 className="text-3xl font-bold text-base-100">
                     {cat.category}
@@ -103,7 +105,7 @@ const FeaturedCategories = () => {
                 }}
                 style={{ translateX: "50%", translateY: "50%" }}
               >
-                <button className="btn btn-primary text-base-100 border-none hover:shadow-2xl hover:scale-105 active:scale-95 transition-all ease-in">
+                <button className="btn btn-secondary text-base-100 border-none hover:shadow-2xl hover:scale-105 active:scale-95 transition-all ease-in">
                   Shop Now
                 </button>
               </motion.div>
