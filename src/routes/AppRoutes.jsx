@@ -83,14 +83,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        loader: ({ params }) =>
-          axios(`${import.meta.env.VITE_API_URL}/product/${params.id}`),
         element: (
           <PrivateRoute>
             <ProductDetailsPage />
           </PrivateRoute>
         ),
-        hydrateFallbackElement: <Loader />,
       },
       {
         path: "/updateProduct/:id",

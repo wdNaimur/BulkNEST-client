@@ -1,58 +1,76 @@
-import { useLoaderData, useNavigate } from "react-router";
-import { use, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useContext, useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import LoaderDataFetch from "../UI/LoaderDataFetch";
 
 const ProductDetailsPage = () => {
-  const data = useLoaderData();
-  const { user } = use(AuthContext);
-  const product = data.data;
+  const params = useParams();
   const navigate = useNavigate();
-  const minimumQuantity = product.min_sell_quantity;
-  const initialStock = product.main_quantity;
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
-  const [quantity, setQuantity] = useState(minimumQuantity);
-  const [stock, setStock] = useState(initialStock);
+  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(0);
+  const [stock, setStock] = useState(0);
   const [direction, setDirection] = useState("up");
 
   useEffect(() => {
-    document.title = `BulkNEST | ${product?.name || "Product Details"}`;
+    setLoading(true);
+    axiosSecure(`/product/${params.id}?email=${user?.email}`)
+      .then((data) => {
+        const productData = data.data;
+        setProduct(productData);
+        setStock(productData.main_quantity);
+        setQuantity(productData.min_sell_quantity);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch product", err);
+        setLoading(false);
+      });
+  }, [axiosSecure, params.id, user?.email]);
+
+  useEffect(() => {
+    if (product) {
+      document.title = `BulkNEST | ${product.name}`;
+    }
   }, [product]);
 
   const handleChangeQuantity = (val) => {
-    if (val >= minimumQuantity && val <= stock) {
+    if (!product) return;
+    const min = product.min_sell_quantity;
+    const max = stock;
+
+    if (val >= min && val <= max) {
       setDirection(val > quantity ? "up" : "down");
       setQuantity(val);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handlePlaceOrder = (e) => {
     e.preventDefault();
     const form = e.target;
-    const buyerName = form.fullName.value;
-    const buyerEmail = form.email.value;
-    const buyerPhone = form.phone.value;
-    const buyerAddress = form.address.value;
-    const orderedFrom = user.email;
     const orderInfo = {
       productId: product._id,
       quantity,
-      orderedFrom,
+      orderedFrom: user.email,
       buyerDetails: {
-        buyerName,
-        buyerEmail,
-        buyerPhone,
-        buyerAddress,
+        buyerName: form.fullName.value,
+        buyerEmail: form.email.value,
+        buyerPhone: form.phone.value,
+        buyerAddress: form.address.value,
       },
     };
-    // send data to backend && update data in backend of stock && Stock Minus
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/orders`, orderInfo)
+
+    axiosSecure
+      .post(`/orders/${user.email}`, orderInfo)
       .then((res) => {
-        console.log(res.data);
         if (res.data.success) {
           setStock((prev) => prev - quantity);
           toast.success("Order Placed Successfully");
@@ -65,10 +83,23 @@ const ProductDetailsPage = () => {
       });
 
     form.reset();
-    setQuantity(minimumQuantity);
-    // Close modal
+    setQuantity(product.min_sell_quantity);
     document.getElementById("my_modal_2").close();
   };
+
+  if (loading || !product) {
+    return <LoaderDataFetch />;
+  }
+
+  const {
+    name,
+    image,
+    price,
+    description,
+    brand,
+    category,
+    min_sell_quantity,
+  } = product;
 
   return (
     <div className="container px-4 mx-auto mt-10">
@@ -76,16 +107,13 @@ const ProductDetailsPage = () => {
         {/* Product Image */}
         <div className="md:justify-self-end justify-self-center w-full max-w-lg">
           <div className="relative w-full aspect-[1] mx-auto">
-            {/* Background Split */}
             <div className="absolute inset-0 z-0 flex">
               <div className="w-1/2 bg-base-200"></div>
               <div className="w-1/2 bg-primary"></div>
             </div>
-
-            {/* Image */}
             <img
-              src={product.image}
-              alt={product.name}
+              src={image}
+              alt={name}
               className="absolute inset-0 z-10 w-4/5 h-4/5 object-cover mx-auto my-auto top-[10%] left-[10%] right-[10%] bottom-[10%]"
             />
           </div>
@@ -94,14 +122,12 @@ const ProductDetailsPage = () => {
         {/* Product Details */}
         <div className="flex-1">
           <span className="inline-block px-3 py-1 text-sm bg-secondary/10 text-secondary rounded-full font-semibold mb-2 uppercase">
-            {product.category}
+            {category}
           </span>
-
-          <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
-          <p className="text-secondary/80 mb-3">{product.description}</p>
-
+          <h1 className="text-3xl font-bold mb-2">{name}</h1>
+          <p className="text-secondary/80 mb-3">{description}</p>
           <div className="text-2xl font-semibold text-secondary mb-6">
-            ${product.price}
+            ${price}
             <span className="text-sm text-primary ml-1">per unit</span>
           </div>
 
@@ -110,21 +136,18 @@ const ProductDetailsPage = () => {
             <ul className="grid gap-3 text-secondary/80">
               <li className="flex items-center gap-2">
                 <TiTick className="text-secondary" size={20} />
-                {product.productContent}
+                Minimum Order: {min_sell_quantity}
               </li>
               <li className="flex items-center gap-2">
                 <TiTick className="text-secondary" size={20} />
-                Minimum Order: {minimumQuantity}
-              </li>
-              <li className="flex items-center gap-2">
-                <TiTick className="text-secondary" size={20} />
-                Stock:
-                <span className="text-primary font-medium">{stock}</span>
+                Stock: <span className="text-primary font-medium">
+                  {stock}
+                </span>{" "}
                 units
               </li>
               <li className="flex items-center gap-2">
                 <TiTick className="text-secondary" size={20} />
-                Brand: {product.brand}
+                Brand: {brand}
               </li>
             </ul>
           </div>
@@ -134,17 +157,14 @@ const ProductDetailsPage = () => {
             <h2 className="text-lg font-semibold mb-2">
               Select Quantity{" "}
               <span className="opacity-55 text-secondary">
-                (minimum: {minimumQuantity})
+                (minimum: {min_sell_quantity})
               </span>
             </h2>
-            {/* Quantity Button  */}
             <div className="flex items-center gap-4">
               <button
                 onClick={() => handleChangeQuantity(quantity - 1)}
-                disabled={quantity <= minimumQuantity}
-                className={`btn btn-sm btn-circle text-xl btn-primary ${
-                  quantity <= minimumQuantity ? "btn-disabled" : ""
-                }`}
+                disabled={quantity <= min_sell_quantity}
+                className="btn btn-sm btn-circle text-xl btn-primary"
               >
                 –
               </button>
@@ -167,31 +187,31 @@ const ProductDetailsPage = () => {
               <button
                 onClick={() => handleChangeQuantity(quantity + 1)}
                 disabled={quantity >= stock}
-                className={`btn btn-sm btn-circle text-xl btn-primary ${
-                  quantity >= stock ? "btn-disabled" : ""
-                }`}
+                className="btn btn-sm btn-circle text-xl btn-primary"
               >
                 +
               </button>
             </div>
           </div>
 
-          {/* Buttons */}
+          {/* Buy Button */}
           <div className="mt-4">
             <button
               className={`btn btn-primary ${
-                stock < minimumQuantity ? "text-secondary-100" : "text-base-100"
+                stock < min_sell_quantity
+                  ? "text-secondary-100"
+                  : "text-base-100"
               }`}
-              disabled={stock < minimumQuantity}
+              disabled={stock < min_sell_quantity}
               onClick={() => document.getElementById("my_modal_2").showModal()}
             >
-              {stock < minimumQuantity ? "Not Available" : "Buy Now"}
+              {stock < min_sell_quantity ? "Not Available" : "Buy Now"}
             </button>
 
             {/* Modal */}
             <dialog id="my_modal_2" className="modal">
               <div className="modal-box">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handlePlaceOrder} className="space-y-4">
                   <h3 className="font-bold text-lg pb-2 text-center border-dashed border-b-2 border-primary/40">
                     Your Product
                   </h3>
@@ -205,9 +225,9 @@ const ProductDetailsPage = () => {
                       <button
                         type="button"
                         onClick={() => handleChangeQuantity(quantity - 1)}
-                        disabled={quantity <= minimumQuantity}
+                        disabled={quantity <= min_sell_quantity}
                         className={`btn btn-sm btn-circle text-xl btn-primary ${
-                          quantity <= minimumQuantity ? "btn-disabled" : ""
+                          quantity <= min_sell_quantity ? "btn-disabled" : ""
                         }`}
                       >
                         –
