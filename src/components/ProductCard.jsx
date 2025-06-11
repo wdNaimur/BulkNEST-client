@@ -67,7 +67,7 @@ const ProductCard = ({ product }) => {
                 </span>
               </div>
               <p className="text-sm opacity-80 mb-2">
-                {description.length > 60
+                {description?.length > 60
                   ? description.slice(0, 50).split(" ").slice(0, -1).join(" ") +
                     "..."
                   : description}

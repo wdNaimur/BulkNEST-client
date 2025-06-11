@@ -1,27 +1,42 @@
-import React, { useState } from "react";
-import { useLoaderData } from "react-router";
+import React, { use, useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import { AuthContext } from "../AuthContexts/AuthContext";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import LoaderDataFetch from "../UI/LoaderDataFetch";
 
 const AllProductsPage = () => {
-  const data = useLoaderData();
-  const initialProducts = data?.data || [];
-
+  const { user } = use(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const [allProducts, setAllProducts] = useState([]);
+  const [displayedProducts, setDisplayedProducts] = useState([]);
   const [available, setAvailable] = useState(false);
-  const [products, setProducts] = useState(initialProducts);
+  const axiosSecure = useAxiosSecure();
+  useEffect(() => {
+    setLoading(true);
+    axiosSecure(`/products/${user.email}`).then((data) => {
+      setAllProducts(data?.data);
+      setDisplayedProducts(data?.data);
+      setLoading(false);
+    });
+  }, [user.email, axiosSecure]);
 
   const handleAvailableProducts = () => {
     const newAvailable = !available;
     setAvailable(newAvailable);
 
     if (newAvailable) {
-      const availableProducts = initialProducts.filter(
+      const filteredProducts = allProducts.filter(
         (product) => product.main_quantity - product.min_sell_quantity >= 100
       );
-      setProducts(availableProducts);
+      setDisplayedProducts(filteredProducts);
     } else {
-      setProducts(initialProducts);
+      setDisplayedProducts(allProducts);
     }
   };
+
+  if (loading) {
+    return <LoaderDataFetch />;
+  }
 
   return (
     <section className="container mx-auto px-4 py-10">
@@ -31,7 +46,7 @@ const AllProductsPage = () => {
       </div>
 
       <div className="flex items-center gap-4 mb-6">
-        <span className="">Show Available Products</span>
+        <span>Show Available Products</span>
         <input
           type="checkbox"
           className="toggle toggle-primary"
@@ -41,7 +56,7 @@ const AllProductsPage = () => {
       </div>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full mt-6">
-        {products.map((product) => (
+        {displayedProducts.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>

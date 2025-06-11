@@ -58,13 +58,11 @@ const router = createBrowserRouter([
 
       {
         path: "/allProduct",
-        loader: () => axios(`${import.meta.env.VITE_API_URL}/products`),
         element: (
           <PrivateRoute>
             <AllProductsPage />
           </PrivateRoute>
         ),
-        hydrateFallbackElement: <Loader />,
       },
 
       {
