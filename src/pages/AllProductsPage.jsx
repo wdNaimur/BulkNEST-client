@@ -10,35 +10,27 @@ const AllProductsPage = () => {
   }, []);
   const { user } = use(AuthContext);
   const [loading, setLoading] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [available, setAvailable] = useState(false);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
-    setLoading(true);
-    axiosSecure(`/products/${user.email}`)
+    setProductsLoading(true);
+    axiosSecure(`/products/${user.email}?available=${available}`)
       .then((data) => {
-        setAllProducts(data?.data);
         setDisplayedProducts(data?.data);
         setLoading(false);
+        setProductsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
+        setProductsLoading(false);
       });
-  }, [user.email, axiosSecure]);
+  }, [user.email, axiosSecure, available]);
 
   const handleAvailableProducts = () => {
-    const newAvailable = !available;
-    setAvailable(newAvailable);
-
-    if (newAvailable) {
-      const filteredProducts = allProducts.filter(
-        (product) => product.main_quantity - product.min_sell_quantity >= 100
-      );
-      setDisplayedProducts(filteredProducts);
-    } else {
-      setDisplayedProducts(allProducts);
-    }
+    setAvailable(!available);
   };
 
   if (loading) {
@@ -61,12 +53,15 @@ const AllProductsPage = () => {
           onChange={handleAvailableProducts}
         />
       </div>
-
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full mt-6">
-        {displayedProducts.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
+      {productsLoading ? (
+        <LoaderDataFetch />
+      ) : (
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full mt-6">
+          {displayedProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

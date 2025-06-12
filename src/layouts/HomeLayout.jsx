@@ -1,4 +1,4 @@
-import React, { use, useEffect } from "react";
+import React, { use } from "react";
 import { Outlet, useNavigation } from "react-router";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../AuthContexts/AuthContext";
@@ -14,7 +14,7 @@ const HomeLayout = () => {
   }
   return (
     <div className="flex bg-base-200 min-h-screen font-outfit">
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <main className="flex-1 lg:mt-[65px] mt-[64px] overflow-x-auto">
         {state == "loading" ? <LoaderDataFetch /> : <Outlet />}
