@@ -8,26 +8,45 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 
 const SingleCategoryPage = () => {
   const { category } = useParams();
-  useEffect(() => {
-    document.title = `BulkNEST | ${category || "Category"}`;
-  }, [category]);
   const { user } = use(AuthContext);
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState(null);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
+    setLoading(true);
     axiosSecure(`/categories/${category}?email=${user?.email}`)
       .then((data) => {
-        console.log(data);
         setProducts(data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Failed to fetch product data");
+        toast.error("Failed to fetch product", err);
+        setLoading(false);
       });
   }, [axiosSecure, category, user?.email]);
 
   console.log(category, products);
-  if (!products) return <LoaderDataFetch />;
+  if (loading) {
+    return <LoaderDataFetch />;
+  }
+  if (!loading && Array.isArray(products) && !products.length) {
+    toast.error("No Product in this category");
+    return (
+      <div className="container mx-auto px-4 font-poppins">
+        <div className="p-10 space-y-2 my-10">
+          <h1 className="text-4xl font-grand-hotel text-center text-primary">
+            No Products Available
+          </h1>
+          <p className="text-center w-8/12 mx-auto opacity-80">
+            There are currently no products in this category. Please check back
+            later or explore other categories.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section className="container mx-auto px-4 py-10">
       <div className="bg-base-100 p-10 rounded-box space-y-4 text-center mb-8">

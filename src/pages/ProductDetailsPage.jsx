@@ -25,12 +25,12 @@ const ProductDetailsPage = () => {
       .then((data) => {
         const productData = data.data;
         setProduct(productData);
-        setStock(productData.main_quantity);
-        setQuantity(productData.min_sell_quantity);
+        setStock(productData?.main_quantity);
+        setQuantity(productData?.min_sell_quantity);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to fetch product", err);
+        // toast.error("Failed to fetch product", err);
         setLoading(false);
       });
   }, [axiosSecure, params.id, user?.email]);
@@ -42,9 +42,27 @@ const ProductDetailsPage = () => {
       document.title = `BulkNEST | Details`;
     }
   }, [product]);
-
+  if (loading) {
+    return <LoaderDataFetch />;
+  }
+  if (!product) {
+    toast.error("This product doesn't exist.");
+    return (
+      <div className="container mx-auto px-4 font-poppins">
+        <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+          <h1 className="text-4xl font-grand-hotel text-center text-primary">
+            Product Not Found
+          </h1>
+          <p className="text-center w-8/12 mx-auto opacity-80">
+            The product you are looking for does not exist or may have been
+            removed. Please check the URL or return to the product listing to
+            browse available items.
+          </p>
+        </div>
+      </div>
+    );
+  }
   const handleChangeQuantity = (val) => {
-    if (!product) return;
     const min = product.min_sell_quantity;
     const max = stock;
 
@@ -87,10 +105,6 @@ const ProductDetailsPage = () => {
     setQuantity(product.min_sell_quantity);
     document.getElementById("my_modal_2").close();
   };
-
-  if (loading || !product) {
-    return <LoaderDataFetch />;
-  }
 
   const {
     name,

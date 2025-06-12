@@ -10,12 +10,22 @@ const UpdateProductPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
+  console.log(product);
+  const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     document.title = "BulkNEST | Update Product";
+    setLoading(true);
     axiosSecure(`/product/${id}?email=${user?.email}`)
-      .then((data) => setProduct(data.data))
-      .catch(() => toast.error("Failed to fetch product data"));
+      .then((data) => {
+        setProduct(data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("This product doesn't exist.");
+        setLoading(false);
+      });
   }, [id, axiosSecure, user.email]);
 
   const handleUpdateProduct = async (e) => {
@@ -29,8 +39,6 @@ const UpdateProductPage = () => {
     updatedData.min_sell_quantity = parseInt(updatedData.min_sell_quantity);
     updatedData.rating = parseInt(updatedData.rating);
     updatedData.userEmail = user.email;
-    console.log(updatedData);
-
     axiosSecure
       .patch(`/product/${id}?email=${user?.email}`, updatedData)
       .then((data) => {
@@ -43,9 +51,25 @@ const UpdateProductPage = () => {
       })
       .catch(() => toast.error("Server Error!"));
   };
-
-  if (!product) return <LoaderDataFetch />;
-
+  if (loading) {
+    return <LoaderDataFetch />;
+  }
+  if (!product) {
+    return (
+      <div className="container mx-auto px-4 font-poppins">
+        <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+          <h1 className="text-4xl font-grand-hotel text-center text-primary">
+            Product Not Found
+          </h1>
+          <p className="text-center w-8/12 mx-auto opacity-80">
+            The product you are looking for does not exist or may have been
+            removed. Please check the URL or return to the product listing to
+            browse available items.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">
