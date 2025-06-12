@@ -8,6 +8,9 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 
 const SingleCategoryPage = () => {
   const { category } = useParams();
+  useEffect(() => {
+    document.title = `BulkNEST | ${category || "Category"}`;
+  }, [category]);
   const { user } = use(AuthContext);
   const [products, setProducts] = useState(null);
   const axiosSecure = useAxiosSecure();

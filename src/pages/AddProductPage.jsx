@@ -6,13 +6,12 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddProductPage = () => {
-  const navigate = useNavigate();
-  const { user } = use(AuthContext);
-  const axiosSecure = useAxiosSecure();
-
   useEffect(() => {
     document.title = "BulkNEST | Add Product";
   }, []);
+  const navigate = useNavigate();
+  const { user } = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const handleAddProduct = async (e) => {
     e.preventDefault();

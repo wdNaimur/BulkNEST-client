@@ -7,16 +7,16 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 import { motion, useInView } from "framer-motion";
 
 const SignUpPage = () => {
+  const { createUser, setUser, updateUser, googleSignIn, user } =
+    useContext(AuthContext);
   useEffect(() => {
-    document.title = "BulkNEST | Sign Up";
-  }, []);
+    document.title = `BulkNEST | ${user?.email ? "Signed Up" : "Sign Up"}`;
+  }, [user?.email]);
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
     margin: "0px 0px -100px 0px",
   });
-  const { createUser, setUser, updateUser, googleSignIn, user } =
-    useContext(AuthContext);
 
   const [nameError, setNameError] = useState("");
   const [errorPassword, setErrorPassword] = useState("");

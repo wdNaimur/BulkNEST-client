@@ -5,6 +5,9 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 
 const AllProductsPage = () => {
+  useEffect(() => {
+    document.title = "BulkNEST | All Products";
+  }, []);
   const { user } = use(AuthContext);
   const [loading, setLoading] = useState(true);
   const [allProducts, setAllProducts] = useState([]);

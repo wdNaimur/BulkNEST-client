@@ -38,6 +38,8 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     if (product) {
       document.title = `BulkNEST | ${product.name}`;
+    } else {
+      document.title = `BulkNEST | Details`;
     }
   }, [product]);
 

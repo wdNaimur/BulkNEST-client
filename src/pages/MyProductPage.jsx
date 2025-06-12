@@ -10,6 +10,7 @@ const MyProductPage = () => {
   const [products, setProducts] = useState([]);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
+    document.title = "BulkNEST | My Products";
     setLoading(true);
     axiosSecure(`/myProducts/${user?.email}`)
       .then((data) => {

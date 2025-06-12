@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
@@ -34,6 +34,9 @@ const featuredCategories = [
 ];
 
 const FeaturedCategories = () => {
+  useEffect(() => {
+    document.title = "BulkNEST | Categories";
+  }, []);
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">

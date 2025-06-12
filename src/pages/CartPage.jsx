@@ -6,6 +6,9 @@ import LoaderDataFetch from "../UI/LoaderDataFetch";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const CartPage = () => {
+  useEffect(() => {
+    document.title = "BulkNEST | My Cart";
+  }, []);
   const { user } = use(AuthContext);
   const [loading, setLoading] = useState(true);
   const [allOrder, setAllOrder] = useState([]);
