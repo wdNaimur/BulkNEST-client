@@ -1,36 +1,41 @@
-import React, { use } from "react";
-import { MdDeleteOutline } from "react-icons/md";
+import React from "react";
 import { Link } from "react-router";
 import { Rating } from "react-simple-star-rating";
-import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
 const ProductTable = ({ product }) => {
-  console.log(product);
   return (
     <tr>
+      {/* Product  */}
       <td className="whitespace-nowrap">
-        <div className="flex items-center gap-3">
+        <div className="flex gap-4">
           <div className="avatar">
             <div className="mask mask-squircle h-20 w-20">
               <img
-                src={product.image}
-                alt={product.name}
+                src={product?.image}
+                alt={product?.name}
                 className="object-cover w-full h-full"
               />
             </div>
           </div>
-          <div>
-            <div className="font-bold">{product.productName}</div>
-            <div className="text-sm opacity-50">{product.productBrand}</div>
+
+          <div className="rounded">
+            <h2 className="font-bold text-lg text-secondary">
+              {product?.name}
+            </h2>
+            <p className="text-sm text-primary">{product?.brand}</p>
           </div>
         </div>
       </td>
-
+      {/* Price  */}
+      <td className="whitespace-nowrap text-center min-w-[100px]">
+        <span className="font-semibold text-3xl text-primary">
+          ${product.price} <span className="text-sm opacity-80">/ unit</span>
+        </span>
+      </td>
+      {/* rating  */}
       <td className="whitespace-nowrap text-center">
-        <h2 className="text-lg font-bold mb-1">{product.name}</h2>
-        <div className="text-sm opacity-60 mb-1">{product.category}</div>
-        <p className="text-xs uppercase font-medium tracking-wide text-base-100 px-2 py-1 rounded-box flex items-center gap-1 bg-secondary w-fit mx-auto">
+        <p className="text-xs uppercase font-medium tracking-wide text-base-100 px-2 py-1 rounded-box flex items-center gap-1 bg-base-200 w-fit mx-auto">
           <Rating
             initialValue={product.rating}
             readonly
@@ -48,14 +53,9 @@ const ProductTable = ({ product }) => {
         {product.main_quantity}
       </td>
 
-      {/* Total Price */}
+      {/* min Quantity  */}
       <td className="whitespace-nowrap text-center min-w-[100px]">
         {product.min_sell_quantity}
-      </td>
-      <td className="whitespace-nowrap text-center min-w-[100px]">
-        <span className="font-semibold text-3xl text-primary">
-          ${product.price} <span className="text-sm opacity-80">/ unit</span>
-        </span>
       </td>
 
       {/* Actions */}

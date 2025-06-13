@@ -90,12 +90,12 @@ const AllProductsPage = () => {
             <table className="table table-auto bg-base-100">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th className="text-center">Details</th>
+                  <th className="ps-20">Product</th>
+                  <th className="text-center">Price</th>
+                  <th className="text-center">Rating</th>
                   <th className="text-center">Stock</th>
                   <th className="text-center">Min Order</th>
-                  <th className="text-center">Price</th>
-                  <th className="text-center">Action</th>
+                  <th className="text-center">View</th>
                 </tr>
               </thead>
               <tbody>
