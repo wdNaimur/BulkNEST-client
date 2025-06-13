@@ -28,14 +28,14 @@ const Footer = () => {
           <img className="h-6 object-contain" src="/favicon.png" alt="Logo" />
           <span className="font-bold text-3xl font-outfit">BulkNEST</span>
         </Link>
-        <p className="max-w-md opacity-70 text-center">
+        <p className="max-w-[90%] opacity-70 px-4 text-center">
           Powering Global Wholesale. One Marketplace. Infinite Supply.
         </p>
       </aside>
 
       {/* Navigation Links */}
       <nav>
-        <ul className="grid grid-flow-col gap-4">
+        <ul className="flex flex-row flex-wrap items-center justify-center px-6 gap-4">
           {links.map((link) => (
             <li key={link.path}>
               <NavLink
@@ -78,9 +78,11 @@ const Footer = () => {
           </a>
         </div>
       </nav>
-      <p className="bg-[#0D9488] w-full py-1">
-        © {new Date().getFullYear()} BulkNEST — Designed & Developed by Md.
-        Naimur Rahman
+      <p className="border-b-[#0D9488] border-b-6 pb-2 w-full py-1">
+        <span className=" opacity-60">
+          © {new Date().getFullYear()} BulkNEST — Designed & Developed by Md.
+          Naimur Rahman
+        </span>
       </p>
     </footer>
   );

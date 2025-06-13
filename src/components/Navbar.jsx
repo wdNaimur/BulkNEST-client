@@ -176,7 +176,7 @@ const Navbar = () => {
               {user ? (
                 <Profile user={user} />
               ) : (
-                <Link to="/signIn">
+                <Link className="hidden sm:inline-flex" to="/signIn">
                   <button className="btn btn-primary text-white">
                     Sign In
                   </button>

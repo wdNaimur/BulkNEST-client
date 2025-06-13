@@ -57,7 +57,7 @@ const Profile = ({ user }) => {
         </div>
         <button
           onClick={handleSignOut}
-          className="bg-secondary btn text-base-100"
+          className="bg-secondary btn text-base-100 hidden sm:inline-flex"
         >
           Sign Out
         </button>
