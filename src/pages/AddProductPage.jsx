@@ -8,6 +8,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 const AddProductPage = () => {
   useEffect(() => {
     document.title = "BulkNEST | Add Product";
+    window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
   const { user } = use(AuthContext);

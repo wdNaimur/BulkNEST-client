@@ -11,6 +11,9 @@ const MyProductPage = () => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     document.title = "BulkNEST | My Products";
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     setLoading(true);
     axiosSecure(`/myProducts/${user?.email}`)
       .then((data) => {

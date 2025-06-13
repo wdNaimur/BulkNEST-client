@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
 import Profile from "./Profile";
@@ -8,7 +8,6 @@ import { IoCartOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const { user, userSignOut } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const handleNavClick = () => {
     const drawer = document.getElementById("my-drawer-2");

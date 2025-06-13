@@ -10,6 +10,7 @@ const SignInPage = () => {
   const { userSignIn, googleSignIn, user } = useContext(AuthContext);
   useEffect(() => {
     document.title = `BulkNEST | ${user?.email ? "Signed In" : "Sign In"}`;
+    window.scrollTo(0, 0);
   }, [user?.email]);
   const location = useLocation();
   const navigate = useNavigate();

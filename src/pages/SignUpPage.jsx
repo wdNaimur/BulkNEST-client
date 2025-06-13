@@ -11,6 +11,7 @@ const SignUpPage = () => {
     useContext(AuthContext);
   useEffect(() => {
     document.title = `BulkNEST | ${user?.email ? "Signed Up" : "Sign Up"}`;
+    window.scrollTo(0, 0);
   }, [user?.email]);
   const ref = useRef(null);
   const isInView = useInView(ref, {

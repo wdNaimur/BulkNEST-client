@@ -8,6 +8,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 const CartPage = () => {
   useEffect(() => {
     document.title = "BulkNEST | My Cart";
+    window.scrollTo(0, 0);
   }, []);
   const { user } = use(AuthContext);
   const [loading, setLoading] = useState(true);

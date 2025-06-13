@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 const HomePage = () => {
   useEffect(() => {
     document.title = "BulkNEST | Home";
+    window.scrollTo(0, 0);
   }, []);
 
   return (

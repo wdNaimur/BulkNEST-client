@@ -36,6 +36,7 @@ const featuredCategories = [
 const FeaturedCategories = () => {
   useEffect(() => {
     document.title = "BulkNEST | Categories";
+    window.scrollTo(0, 0);
   }, []);
   return (
     <div className="container mx-auto px-4 py-10">

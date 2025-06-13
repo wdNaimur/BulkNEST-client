@@ -38,8 +38,10 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     if (product) {
       document.title = `BulkNEST | ${product.name}`;
+      window.scrollTo(0, 0);
     } else {
       document.title = `BulkNEST | Details`;
+      window.scrollTo(0, 0);
     }
   }, [product]);
   if (loading) {

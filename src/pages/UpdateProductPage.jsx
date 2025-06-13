@@ -15,6 +15,9 @@ const UpdateProductPage = () => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     document.title = "BulkNEST | Update Product";
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     setLoading(true);
     axiosSecure(`/product/${id}?email=${user?.email}`)
       .then((data) => {

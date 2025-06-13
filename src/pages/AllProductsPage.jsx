@@ -17,6 +17,7 @@ const AllProductsPage = () => {
 
   useEffect(() => {
     document.title = "BulkNEST | All Products";
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
