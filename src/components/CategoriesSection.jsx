@@ -39,7 +39,7 @@ const CategoriesSection = () => {
         <div className="flex flex-wrap justify-center gap-4 px-1">
           {featuredCategories.map((cat, index) => (
             <Link
-              to={`${cat.category}`}
+              to={`categories/${cat.category}`}
               key={index}
               className="basis-full sm:basis-64"
             >
@@ -113,7 +113,7 @@ const CategoriesSection = () => {
           ))}
         </div>
         <button className="btn btn-primary mt-4 text-base-200">
-          View All Category
+          <Link to="/categories">View All Category</Link>
         </button>
       </div>
     </section>
