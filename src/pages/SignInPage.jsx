@@ -152,7 +152,7 @@ const SignInPage = () => {
                 <button
                   type="button"
                   onClick={handleGoogleSignIn}
-                  className="btn bg-white text-black border-secondary/20 shadow-sm shadow-secondary/20 w-full"
+                  className="btn bg-white text-black border-primary/15 shadow-sm shadow-primary/15 w-full"
                 >
                   <svg
                     aria-label="Google logo"

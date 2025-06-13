@@ -267,7 +267,7 @@ const SignUpPage = () => {
               <div className="pt-5 border-secondary/40 border-t-2 border-dashed mt-4">
                 <a
                   onClick={handleGoogleSignIn}
-                  className="btn bg-white text-black border-secondary/20 shadow-sm shadow-secondary/20 w-full"
+                  className="btn bg-white text-black border-primary/15 shadow-sm shadow-primary/15 w-full"
                 >
                   <svg
                     aria-label="Google logo"
@@ -299,15 +299,15 @@ const SignUpPage = () => {
                   Sign In with Google
                 </a>
               </div>
-
               <div className="text-sm pt-4 text-center">
                 <p>
                   Already have an Account?{" "}
                   <Link
-                    to="/login"
-                    className="text-primary underline underline-offset-2 cursor-pointer"
+                    state={{ from }}
+                    to="/signIn"
+                    className="link link-hover text-primary font-semibold"
                   >
-                    Login
+                    Sign In
                   </Link>
                 </p>
               </div>

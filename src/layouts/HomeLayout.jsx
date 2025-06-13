@@ -14,10 +14,10 @@ const HomeLayout = () => {
     return <Loader />;
   }
   return (
-    <div className="flex flex-col bg-base-200 min-h-screen font-outfit">
+    <div className="bg-base-200 flex flex-col min-h-screen font-outfit">
       <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
-      <main className="flex-1 lg:mt-[65px] mt-[64px] overflow-x-auto">
+      <main className="lg:mt-[65px] mt-[64px] flex-1">
         {state == "loading" ? <LoaderDataFetch /> : <Outlet />}
       </main>
       {/* footer  */}

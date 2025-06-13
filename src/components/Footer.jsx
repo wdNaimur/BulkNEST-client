@@ -21,9 +21,12 @@ const Footer = () => {
       ];
 
   return (
-    <footer className="footer footer-center footer-horizontal bg-[#111827] text-white pt-10 -space-y-4">
+    <footer className="relative footer footer-center footer-horizontal text-secondary bg-base-100 pt-10 -space-y-4 overflow-hidden">
+      {/* Green radial glow background */}
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[80%] h-[200px] bg-[#0D9488] opacity-20 blur-3xl rounded-full pointer-events-none z-0"></div>
+
       {/* Company Info */}
-      <aside className="">
+      <aside className="z-10">
         <Link to="/" className="flex items-center justify-center gap-2 mb-1">
           <img className="h-6 object-contain" src="/favicon.png" alt="Logo" />
           <span className="font-bold text-3xl font-outfit">BulkNEST</span>
@@ -34,7 +37,7 @@ const Footer = () => {
       </aside>
 
       {/* Navigation Links */}
-      <nav>
+      <nav className="z-10">
         <ul className="flex flex-row flex-wrap items-center justify-center px-6 gap-4">
           {links.map((link) => (
             <li key={link.path}>
@@ -50,7 +53,7 @@ const Footer = () => {
       </nav>
 
       {/* Social Icons */}
-      <nav>
+      <nav className="z-10">
         <div className="grid grid-flow-col gap-4">
           <a
             href="https://www.facebook.com/mdnaimurwd"
@@ -78,8 +81,10 @@ const Footer = () => {
           </a>
         </div>
       </nav>
-      <p className="border-b-[#0D9488] border-b-6 pb-2 w-full py-1">
-        <span className=" opacity-60">
+
+      {/* Footer Bottom Text */}
+      <p className="border-b-[#0D9488] border-b-6 pb-2 w-full py-1 z-10">
+        <span className="opacity-60">
           © {new Date().getFullYear()} BulkNEST — Designed & Developed by Md.
           Naimur Rahman
         </span>

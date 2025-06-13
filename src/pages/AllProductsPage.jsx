@@ -85,8 +85,8 @@ const AllProductsPage = () => {
           ))}
         </div>
       ) : (
-        <div>
-          <div className="overflow-x my-10">
+        <div className="rounded-box">
+          <div className="overflow-x-scroll my-10">
             <table className="table table-auto bg-base-100">
               <thead>
                 <tr>

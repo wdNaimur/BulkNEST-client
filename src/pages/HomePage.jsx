@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Banner from "../components/Banner";
+import HowItWorks from "../components/HowItWorks";
 
 const HomePage = () => {
   useEffect(() => {
@@ -8,9 +9,14 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="w-screen min-h-96">
-      <Banner />
-    </div>
+    <section>
+      <div className="min-h-96">
+        <Banner />
+      </div>
+      <div>
+        <HowItWorks />
+      </div>
+    </section>
   );
 };
 
