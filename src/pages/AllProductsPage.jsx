@@ -1,36 +1,43 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProductCard from "../components/ProductCard";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
+import ProductTable from "../components/ProductTable";
+import { Rating } from "react-simple-star-rating";
 
 const AllProductsPage = () => {
-  useEffect(() => {
-    document.title = "BulkNEST | All Products";
-  }, []);
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
   const [loading, setLoading] = useState(true);
   const [productsLoading, setProductsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [available, setAvailable] = useState(false);
-  const axiosSecure = useAxiosSecure();
+  const [selectedOption, setSelectedOption] = useState("card");
+
   useEffect(() => {
+    document.title = "BulkNEST | All Products";
+  }, []);
+
+  useEffect(() => {
+    if (!user?.email) return;
     setProductsLoading(true);
     axiosSecure(`/products/${user.email}?available=${available}`)
-      .then((data) => {
-        setDisplayedProducts(data?.data);
-        setLoading(false);
-        setProductsLoading(false);
+      .then((res) => {
+        setDisplayedProducts(res?.data || []);
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error fetching products:", err);
+      })
+      .finally(() => {
         setLoading(false);
         setProductsLoading(false);
       });
-  }, [user.email, axiosSecure, available]);
+  }, [user?.email, axiosSecure, available]);
 
-  const handleAvailableProducts = () => {
-    setAvailable(!available);
+  const handleAvailableToggle = () => {
+    setAvailable((prev) => !prev);
   };
 
   if (loading) {
@@ -44,22 +51,60 @@ const AllProductsPage = () => {
         <p className="opacity-70">Explore all available products.</p>
       </div>
 
-      <div className="flex items-center gap-4 mb-6">
-        <span>Show Available Products</span>
-        <input
-          type="checkbox"
-          className="toggle toggle-primary"
-          checked={available}
-          onChange={handleAvailableProducts}
-        />
+      {/* Filters */}
+      <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
+        <div className="flex items-center gap-2">
+          <span>Show Available Products</span>
+          <input
+            type="checkbox"
+            className="toggle toggle-primary"
+            checked={available}
+            onChange={handleAvailableToggle}
+          />
+        </div>
+
+        <div className="w-fit">
+          <select
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+            className="select select-sm select-primary w-full text-primary font-semibold"
+          >
+            <option value="card">Card</option>
+            <option value="list">List</option>
+          </select>
+        </div>
       </div>
+
+      {/* Product List */}
       {productsLoading ? (
         <LoaderDataFetch />
-      ) : (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full mt-6">
+      ) : selectedOption === "card" ? (
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
           {displayedProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
+        </div>
+      ) : (
+        <div>
+          <div className="overflow-x my-10">
+            <table className="table table-auto bg-base-100">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th className="text-center">Details</th>
+                  <th className="text-center">Stock</th>
+                  <th className="text-center">Min Order</th>
+                  <th className="text-center">Price</th>
+                  <th className="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {displayedProducts.map((product) => (
+                  <ProductTable key={product._id} product={product} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </section>

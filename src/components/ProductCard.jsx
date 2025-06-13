@@ -76,7 +76,8 @@ const ProductCard = ({ product }) => {
             <div className="text-sm space-y-1 mb-4 grid grid-cols-2 divide-x-2 divide-dashed divide-primary/40">
               <p className="w-full text-center">
                 <span className="font-semibold text-3xl text-primary">
-                  ${price}
+                  ${product.price}{" "}
+                  <span className="text-sm opacity-80">/ unit</span>
                 </span>
               </p>
               <div className="justify-self-center">
