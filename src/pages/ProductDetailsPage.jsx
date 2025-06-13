@@ -18,6 +18,7 @@ const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(0);
   const [stock, setStock] = useState(0);
   const [direction, setDirection] = useState("up");
+  const [orderLoading, setOrderLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -44,7 +45,7 @@ const ProductDetailsPage = () => {
       window.scrollTo(0, 0);
     }
   }, [product]);
-  if (loading) {
+  if (loading || orderLoading) {
     return <LoaderDataFetch />;
   }
   if (!product) {
@@ -76,6 +77,7 @@ const ProductDetailsPage = () => {
 
   const handlePlaceOrder = (e) => {
     e.preventDefault();
+    setOrderLoading(true);
     const form = e.target;
     const orderInfo = {
       productId: product._id,
@@ -92,15 +94,23 @@ const ProductDetailsPage = () => {
     axiosSecure
       .post(`/orders/${user.email}`, orderInfo)
       .then((res) => {
-        if (res.data.success) {
+        if (res?.data?.success) {
+          setOrderLoading(false);
           setStock((prev) => prev - quantity);
-          toast.success("Order Placed Successfully");
+          toast.success(res.data.message || "Order placed successfully");
           navigate("/cart");
+        } else {
+          setOrderLoading(false);
+          toast.error(res.data.message || "Failed to place order.");
+          navigate("/allProduct");
         }
       })
       .catch((err) => {
-        console.error(err);
-        toast.error("Failed to Place Order");
+        setOrderLoading(false);
+        const errorMsg =
+          err.response?.data?.message || "Failed to place order.";
+        toast.error(errorMsg);
+        navigate("/allProduct");
       });
 
     form.reset();

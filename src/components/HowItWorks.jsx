@@ -30,15 +30,18 @@ const HowItWorks = () => {
     },
   ];
   return (
-    <section className="py-16 bg-base-100">
+    <section className="pt-16 pb-8 bg-base-100">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-secondary">
-          How It Works
-        </h2>
-        <p className="opacity-80">
-          Your Seamless Journey from Discovery to Delivery
-        </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-secondary">
+            How It Works
+          </h2>
+          <p className="opacity-80">
+            Your Seamless Journey from Discovery to Delivery
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => (
             <div
               key={index}
@@ -61,6 +64,3 @@ const HowItWorks = () => {
 };
 
 export default HowItWorks;
-{
-  /* ; */
-}

@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import Banner from "../components/Banner";
 import HowItWorks from "../components/HowItWorks";
+import TrustedByBusinesses from "../components/TrustedByBusinesses";
+import FAQSection from "../components/FAQSection";
+import CategoriesSection from "../components/CategoriesSection";
 
 const HomePage = () => {
   useEffect(() => {
@@ -9,14 +12,20 @@ const HomePage = () => {
   }, []);
 
   return (
-    <section>
-      <div className="min-h-96">
+    <>
+      <section className="min-h-96">
         <Banner />
-      </div>
-      <div>
+      </section>
+      <section>
         <HowItWorks />
-      </div>
-    </section>
+      </section>
+      <section>
+        <CategoriesSection />
+      </section>
+      <section>
+        <FAQSection />
+      </section>
+    </>
   );
 };
 
