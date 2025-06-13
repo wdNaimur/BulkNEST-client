@@ -129,7 +129,7 @@ const ProductDetailsPage = () => {
   } = product;
 
   return (
-    <div className="container px-4 mx-auto mt-10">
+    <div className="container px-4 mx-auto my-10">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-6 text-primary">
         {/* Product Image */}
         <div className="md:justify-self-end justify-self-center w-full max-w-lg">
