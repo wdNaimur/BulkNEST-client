@@ -4,7 +4,6 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 import ProductTable from "../components/ProductTable";
-import { Rating } from "react-simple-star-rating";
 
 const AllProductsPage = () => {
   const { user } = useContext(AuthContext);
@@ -79,7 +78,7 @@ const AllProductsPage = () => {
       {productsLoading ? (
         <LoaderDataFetch />
       ) : selectedOption === "card" ? (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
           {displayedProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}

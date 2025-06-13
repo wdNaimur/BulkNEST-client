@@ -13,6 +13,9 @@ const SingleCategoryPage = () => {
   const [products, setProducts] = useState(null);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     setLoading(true);
     axiosSecure(`/categories/${category}?email=${user?.email}`)
       .then((data) => {

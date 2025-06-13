@@ -46,9 +46,9 @@ const OrderTable = ({ order, allOrder, setAllOrder }) => {
             if (data.data.deletedCount) {
               const remaining = allOrder.filter((item) => item._id !== id);
               setAllOrder(remaining);
-              toast.success("Order deleted successfully!");
+              toast.success("Order history deleted successfully!");
             } else {
-              toast.error("Failed to delete Order!");
+              toast.error("Failed to delete Order history!");
             }
           })
           .catch((err) => {
