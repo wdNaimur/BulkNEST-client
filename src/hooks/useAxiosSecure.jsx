@@ -29,11 +29,11 @@ const useAxiosSecure = () => {
         const status = error?.response?.status;
         if (status === 401 || status === 403) {
           toast.error(`You are logged out due to ${status} error.`);
-          // userSignOut()
-          //   .then(() => {
-          //     toast.error(`You are logged out due to ${status} error.`);
-          //   })
-          //   .catch((err) => console.error(err));
+          userSignOut()
+            .then(() => {
+              toast.error(`You are logged out due to ${status} error.`);
+            })
+            .catch((err) => console.error(err));
         }
         return Promise.reject(error);
       }

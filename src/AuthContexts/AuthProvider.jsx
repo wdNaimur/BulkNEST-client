@@ -33,7 +33,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const userSignOut = () => {
-    localStorage.removeItem("token");
     return signOut(auth);
   };
 
