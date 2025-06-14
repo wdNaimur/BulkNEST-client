@@ -18,3 +18,31 @@ BulkNest is a B2B wholesale marketplace designed to simplify and streamline bulk
 - **Responsive Design:** Optimized for mobile and desktop devices.
 - **Empty State Messages:** Friendly messages when no products are found or invalid IDs searched.
 - **Animations:** Smooth UI animations with Framer Motion.
+
+## Technologies Used
+
+### Frontend
+
+- **react**
+- **react-router**
+- **firebase**
+- **axios**
+- **tailwindcss**
+- **daisyui**
+- **framer-motion**
+- **swiper**
+- **react-hot-toast**
+- **react-icons**
+- **react-tooltip**
+- **sweetalert2**
+- **react-simple-star-rating**
+- **react-fast-marquee**
+
+### Backend
+
+- **express**
+- **mongodb**
+- **firebase-admin**
+- **dotenv**
+- **cors**
+- **cookie-parser**
