@@ -53,10 +53,10 @@ const ProductDetailsPage = () => {
     return (
       <div className="container mx-auto px-4 font-poppins">
         <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
-          <h1 className="text-4xl font-grand-hotel text-center text-primary">
+          <h1 className="text-2xl font-medium text-center text-primary">
             Product Not Found
           </h1>
-          <p className="text-center w-8/12 mx-auto opacity-80">
+          <p className="text-center  mx-auto opacity-80 px-4">
             The product you are looking for does not exist or may have been
             removed. Please check the URL or return to the product listing to
             browse available items.

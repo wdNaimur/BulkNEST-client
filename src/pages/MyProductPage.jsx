@@ -3,6 +3,7 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 import ProductCard from "../components/ProductCard";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 const MyProductPage = () => {
   const { user } = use(AuthContext);
@@ -42,9 +43,26 @@ const MyProductPage = () => {
             <ProductCard key={product._id} product={product} />
           ))
         ) : (
-          <div>No Products</div>
+          <div className="font-poppins col-span-full ">
+            <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+              <h1 className="text-2xl font-medium text-center text-primary">
+                No Products Added
+              </h1>
+              <p className="text-center mx-auto opacity-80 px-4">
+                Your product shelf is empty for now. Add your first product and
+                start selling today!
+              </p>
+              <div className="flex items-center justify-center p-3">
+                <Link
+                  to="/addProduct"
+                  className="btn btn-primary text-base-200 "
+                >
+                  Add Your First Product
+                </Link>
+              </div>
+            </div>
+          </div>
         )}
-        {}
       </div>
     </section>
   );

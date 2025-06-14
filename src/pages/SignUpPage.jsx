@@ -131,7 +131,7 @@ const SignUpPage = () => {
           <h1 className="text-4xl font-grand-hotel text-center text-primary">
             Please Logout First
           </h1>
-          <p className="text-center w-8/12 mx-auto opacity-80">
+          <p className="text-center  mx-auto opacity-80">
             You are already logged in. To create a new account, please logout
             first.
           </p>

@@ -67,13 +67,21 @@ const CartPage = () => {
           </table>
         </div>
       ) : (
-        <div className="p-10 space-y-2 my-10 rounded-box bg-base-100 flex flex-col items-center justify-center gap-4">
-          <h1 className="text-5xl text-center text-primary">
-            Oops! Not Bought any Product.
-          </h1>
-          <Link to="/allProduct" className="btn btn-primary text-white">
-            Buy your First Product
-          </Link>
+        <div className="font-poppins col-span-full ">
+          <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+            <h1 className="text-2xl font-medium text-center text-primary">
+              Your Cart is Empty
+            </h1>
+            <p className="text-center mx-auto opacity-80 px-4">
+              Looks like you haven’t added anything to your cart yet. Start
+              exploring our products and fill it up!
+            </p>
+            <div className="flex items-center justify-center p-3">
+              <Link to="/allProduct" className="btn btn-primary text-base-200 ">
+                Browse Products
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </section>

@@ -43,6 +43,22 @@ const AllProductsPage = () => {
   if (loading) {
     return <LoaderDataFetch />;
   }
+  console.log(!displayedProducts.length);
+  if (!displayedProducts) {
+    return (
+      <div className="container mx-auto px-4 font-poppins">
+        <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+          <h1 className="text-2xl font-medium text-center text-primary">
+            No Products Available
+          </h1>
+          <p className="text-center  mx-auto opacity-80 px-4">
+            We couldn’t find any products at the moment. Please check back later
+            or try refining your filters to explore more options.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="container mx-auto px-4 py-10">
@@ -79,12 +95,26 @@ const AllProductsPage = () => {
       {productsLoading ? (
         <LoaderDataFetch />
       ) : selectedOption === "card" ? (
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-          {displayedProducts.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        </div>
-      ) : (
+        displayedProducts.length ? (
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
+            {displayedProducts.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className=" font-poppins">
+            <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+              <h1 className="text-2xl font-medium text-center text-primary">
+                No Products Available
+              </h1>
+              <p className="text-center  mx-auto opacity-80 px-4">
+                We couldn’t find any products at the moment. Please check back
+                later or try refining your filters to explore more options.
+              </p>
+            </div>
+          </div>
+        )
+      ) : displayedProducts.length ? (
         <div className="rounded-box">
           <div className="overflow-x-scroll my-10">
             <table className="table table-auto bg-base-100">
@@ -108,6 +138,18 @@ const AllProductsPage = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      ) : (
+        <div className=" font-poppins">
+          <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
+            <h1 className="text-2xl font-medium text-center text-primary">
+              No Products Available
+            </h1>
+            <p className="text-center  mx-auto opacity-80 px-4">
+              We couldn’t find any products at the moment. Please check back
+              later or try refining your filters to explore more options.
+            </p>
           </div>
         </div>
       )}
