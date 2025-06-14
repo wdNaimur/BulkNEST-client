@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const CategoriesSection = () => {
   const featuredCategories = [
@@ -24,24 +24,43 @@ const CategoriesSection = () => {
       category: "Health & Beauty",
       image: "https://i.ibb.co/j9cj50DV/Health-Beauty.png",
     },
+    {
+      category: "Automotive Parts & Accessories",
+      image: "https://i.ibb.co.com/LzrhGyxs/Automotive-Parts-Accessories.png",
+    },
   ];
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
+
   return (
     <section className="py-8 bg-base-100">
-      <div className="container mx-auto px-4 text-center">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+            : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+        }
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="container mx-auto px-4 text-center"
+      >
         <div className="mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-secondary">
             Featured Categories
           </h2>
-          <p className="opacity-80">
-            Explore Products Tailored for Every Business Need
+          <p className="opacity-80 px-4">
+            Explore Products Tailored for Every Business
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-4 px-1">
+        <div className="grid 2xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
           {featuredCategories.map((cat, index) => (
             <Link
               to={`categories/${cat.category}`}
               key={index}
-              className="basis-full sm:basis-64"
+              className={`w-full ${
+                index == 4 ? "lg:col-start-2 2xl:col-start-5 lg:mx-auto" : ""
+              }`}
             >
               <motion.div
                 className="relative px-4 pb-4 rounded-2xl cursor-pointer bg-base-200 shadow-2xl shadow-primary/10 group overflow-hidden h-full border-2 border-primary/15"
@@ -74,11 +93,11 @@ const CategoriesSection = () => {
                         <img
                           src={cat.image}
                           alt={cat.category}
-                          className="w-24 h-24 object-fit"
+                          className="sm:w-16 w-12 h-12 sm:h-16 object-fit"
                         />
                       </div>
                     </div>
-                    <h3 className="text-3xl font-bold text-secondary/90 text-center">
+                    <h3 className="text-xl font-bold text-secondary/90 text-center">
                       {cat.category}
                     </h3>
                   </div>
@@ -115,7 +134,7 @@ const CategoriesSection = () => {
         <button className="btn btn-primary mt-4 text-base-200">
           <Link to="/categories">View All Category</Link>
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 };

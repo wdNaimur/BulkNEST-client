@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router";
+import { motion, useInView } from "framer-motion";
 
 const featuredCategories = [
   {
@@ -34,6 +34,9 @@ const featuredCategories = [
 ];
 
 const FeaturedCategories = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
+
   useEffect(() => {
     document.title = "BulkNEST | Categories";
     window.scrollTo(0, 0);
@@ -45,7 +48,17 @@ const FeaturedCategories = () => {
         <p className="opacity-70">See and Visit all categories</p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 mt-8 px-1">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+            : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+        }
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="flex flex-wrap justify-center gap-4 mt-8 px-1"
+      >
         {featuredCategories.map((cat, index) => (
           <Link
             to={`${cat.category}`}
@@ -120,7 +133,7 @@ const FeaturedCategories = () => {
             </motion.div>
           </Link>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

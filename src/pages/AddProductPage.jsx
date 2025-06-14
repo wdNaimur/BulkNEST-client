@@ -4,12 +4,16 @@ import toast from "react-hot-toast";
 import { use } from "react";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { motion, useInView } from "framer-motion";
 
 const AddProductPage = () => {
   useEffect(() => {
     document.title = "BulkNEST | Add Product";
     window.scrollTo(0, 0);
   }, []);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
+
   const navigate = useNavigate();
   const { user } = use(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -50,9 +54,17 @@ const AddProductPage = () => {
         <h2 className="text-4xl font-bold text-primary">Add Product</h2>
         <p className="opacity-70">Fill in the product details below.</p>
       </div>
-      <form
+      <motion.form
+        ref={ref}
+        initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+            : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+        }
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         onSubmit={handleAddProduct}
-        className="bg-base-100 p-8 rounded-box mt-8 space-y-6 shadow-md"
+        className="bg-base-100 p-4 rounded-box mt-8 space-y-6 shadow-md shadow-primary/10 border border-primary/5"
       >
         <div className="grid md:grid-cols-2 gap-6">
           <div className="form-control w-full">
@@ -171,7 +183,7 @@ const AddProductPage = () => {
         <button className="btn btn-primary w-full mt-4 text-base-100">
           Add Product
         </button>
-      </form>
+      </motion.form>
     </div>
   );
 };

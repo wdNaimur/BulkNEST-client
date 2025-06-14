@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -129,7 +129,12 @@ const ProductDetailsPage = () => {
   } = product;
 
   return (
-    <div className="container px-4 mx-auto my-10">
+    <motion.div
+      initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      className="container px-4 mx-auto my-10"
+    >
       <div className="grid md:grid-cols-2 grid-cols-1 gap-6 text-primary">
         {/* Product Image */}
         <div className="md:justify-self-end justify-self-center w-full max-w-lg">
@@ -371,7 +376,7 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

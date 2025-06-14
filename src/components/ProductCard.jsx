@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { MdEdit } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
+import { motion, useInView } from "framer-motion";
 
 const ProductCard = ({ product }) => {
   const {
@@ -16,9 +17,21 @@ const ProductCard = ({ product }) => {
     rating,
     _id,
   } = product;
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -20px 0px" });
 
   return (
-    <div className="w-full h-full group">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+          : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+      }
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      className="w-full h-full group"
+    >
       <div className="rounded-box shadow-sm group-hover:shadow-xl w-full bg-base-100 text-secondary flex flex-col mx-auto h-full group-hover:scale-[1.02] group-hover:-translate-y-1.5 transition-all">
         {/* Image */}
         <div className="relative">
@@ -100,7 +113,7 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

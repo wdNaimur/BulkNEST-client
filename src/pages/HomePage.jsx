@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Banner from "../components/Banner";
 import HowItWorks from "../components/HowItWorks";
-import TrustedByBusinesses from "../components/TrustedByBusinesses";
 import FAQSection from "../components/FAQSection";
 import CategoriesSection from "../components/CategoriesSection";
 

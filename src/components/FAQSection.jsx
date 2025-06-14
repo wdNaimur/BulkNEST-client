@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, useInView } from "framer-motion";
 
 const faqs = [
   {
@@ -29,11 +30,23 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
   return (
-    <div className="container mx-auto px-4 pt-8 pb-16">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+          : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+      }
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      className="container mx-auto px-4 pt-8 pb-16"
+    >
       <div className="container px-4 mx-auto text-center mb-12">
         <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-secondary">
-          Frequently Asked Questions
+          FAQs
         </h2>
         <p className="opacity-80"> We’re here to help!</p>
       </div>
@@ -59,7 +72,7 @@ const FAQSection = () => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -4,6 +4,7 @@ import OrderTable from "../components/OrderTable";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { AnimatePresence } from "framer-motion";
 
 const CartPage = () => {
   useEffect(() => {
@@ -51,14 +52,17 @@ const CartPage = () => {
               </tr>
             </thead>
             <tbody>
-              {allOrder.map((order) => (
-                <OrderTable
-                  key={order._id}
-                  order={order}
-                  allOrder={allOrder}
-                  setAllOrder={setAllOrder}
-                />
-              ))}
+              <AnimatePresence>
+                {allOrder.map((order, index) => (
+                  <OrderTable
+                    key={order._id}
+                    order={order}
+                    allOrder={allOrder}
+                    setAllOrder={setAllOrder}
+                    index={index}
+                  />
+                ))}
+              </AnimatePresence>
             </tbody>
           </table>
         </div>

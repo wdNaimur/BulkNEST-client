@@ -16,7 +16,7 @@ const SignUpPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
-    margin: "0px 0px -100px 0px",
+    margin: "0px 0px -40px 0px",
   });
 
   const [nameError, setNameError] = useState("");
@@ -151,7 +151,7 @@ const SignUpPage = () => {
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         className="container mx-auto px-4 flex gap-10 items-center justify-center select-none my-10 font-poppins"
       >
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl shadow-primary/10  border-2 border-primary/10 ">
           <div className="card-body">
             <h2 className="text-4xl font-bold lg:text-5xl text-primary">
               Sign Up

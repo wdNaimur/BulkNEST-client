@@ -28,7 +28,7 @@ const SignInPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
-    margin: "0px 0px -100px 0px",
+    margin: "0px 0px -40px 0px",
   });
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const SignInPage = () => {
           </div>
         </div>
       ) : (
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-secondary/5 border-2">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl shadow-primary/10  border-2 border-primary/10">
           <div className="card-body">
             <h2 className="text-4xl font-bold lg:text-5xl text-primary">
               Sign In

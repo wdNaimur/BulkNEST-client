@@ -24,7 +24,7 @@ const Banner = () => {
       {/* Slide 1 */}
       <SwiperSlide>
         <div
-          className="hero min-h-[590px] object-cover"
+          className="hero xl:min-h-[590px] lg:min-h-[540px] md:min-h-[500px] sm:min-h-[450px] min-h-[420px] object-cover"
           style={{
             backgroundImage: "url('https://i.ibb.co/3mjXpY0k/Hero-Image.png')",
           }}
@@ -32,7 +32,7 @@ const Banner = () => {
           <div className="hero-overlay z-0 opacity-65 bg-[#111827]"></div>
           <div className="hero-content text-center">
             <div className="max-w-[80%] py-10">
-              <h1 className="mb-5 text-6xl text-white font-bold">
+              <h1 className="mb-5 lg:text-6xl md:text-5xl text-4xl text-white font-bold">
                 Up to 40% Off on Bulk Electronics
               </h1>
               <p className="mb-5 text-white">
@@ -53,7 +53,7 @@ const Banner = () => {
       {/* Slide 2 */}
       <SwiperSlide>
         <div
-          className="hero min-h-[590px] object-cover"
+          className="hero xl:min-h-[590px] lg:min-h-[540px] md:min-h-[500px] sm:min-h-[450px] min-h-[420px] object-cover"
           style={{
             backgroundImage: "url('https://i.ibb.co/5WLN6s1f/Hero-Image.png')",
           }}
@@ -61,7 +61,7 @@ const Banner = () => {
           <div className="hero-overlay z-0 opacity-65 bg-[#111827]"></div>
           <div className="hero-content text-center">
             <div className="max-w-[80%] py-10">
-              <h1 className="mb-5 text-6xl text-white font-bold">
+              <h1 className="mb-5 lg:text-6xl md:text-5xl text-4xl text-white font-bold">
                 Wholesale Apparel – Just $2/Item!
               </h1>
               <p className="mb-5 text-white">
@@ -82,7 +82,7 @@ const Banner = () => {
       {/* Slide 3 */}
       <SwiperSlide>
         <div
-          className="hero min-h-[590px] object-cover"
+          className="hero xl:min-h-[590px] lg:min-h-[540px] md:min-h-[500px] sm:min-h-[450px] min-h-[420px] object-cover"
           style={{
             backgroundImage: "url('https://i.ibb.co/yckQwK2C/Hero-Image.png')",
           }}
@@ -90,10 +90,10 @@ const Banner = () => {
           <div className="hero-overlay z-0 opacity-65 bg-[#111827]"></div>
           <div className="hero-content text-center">
             <div className="max-w-[80%] py-10">
-              <h1 className="mb-5 text-6xl text-white font-bold">
+              <h1 className="mb-5 lg:text-6xl md:text-5xl text-4xl text-white font-bold">
                 Power Tools in Bulk – Save 25%
               </h1>
-              <p className="mb-5 text-white">
+              <p className="mb-5 text-white px-4">
                 High-performance industrial supplies at wholesale rates. Get a
                 custom quote today!
               </p>

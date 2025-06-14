@@ -99,8 +99,12 @@ const AllProductsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {displayedProducts.map((product) => (
-                  <ProductTable key={product._id} product={product} />
+                {displayedProducts.map((product, index) => (
+                  <ProductTable
+                    key={product._id}
+                    product={product}
+                    index={index}
+                  />
                 ))}
               </tbody>
             </table>

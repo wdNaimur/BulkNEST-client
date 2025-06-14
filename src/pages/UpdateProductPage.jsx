@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { motion } from "framer-motion";
 
 const UpdateProductPage = () => {
   const { id } = useParams();
@@ -79,7 +80,10 @@ const UpdateProductPage = () => {
         <h2 className="text-4xl font-bold text-primary">Update Product</h2>
         <p className="opacity-70">Update the product details below.</p>
       </div>
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         onSubmit={handleUpdateProduct}
         className="bg-base-100 p-8 rounded-box mt-8 space-y-6 shadow-md shadow-primary/5"
       >
@@ -201,7 +205,7 @@ const UpdateProductPage = () => {
         <button className="btn btn-primary w-full mt-4 text-base-100">
           Update Product
         </button>
-      </form>
+      </motion.form>
     </div>
   );
 };

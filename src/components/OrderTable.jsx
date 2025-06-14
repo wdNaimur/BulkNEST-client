@@ -6,8 +6,9 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AuthContext } from "../AuthContexts/AuthContext";
+import { motion } from "framer-motion";
 
-const OrderTable = ({ order, allOrder, setAllOrder }) => {
+const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
   const orderDate = new Date(order.date);
   const formattedDate = orderDate.toLocaleDateString("en-US");
   const formattedTime = orderDate.toLocaleTimeString("en-US", {
@@ -17,6 +18,7 @@ const OrderTable = ({ order, allOrder, setAllOrder }) => {
   });
   const axiosSecure = useAxiosSecure();
   const { user } = use(AuthContext);
+  const delay = index * 0.1;
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -59,7 +61,16 @@ const OrderTable = ({ order, allOrder, setAllOrder }) => {
   };
 
   return (
-    <tr>
+    <motion.tr
+      initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+      exit={{ opacity: 0, y: -10, filter: "blur(6px)", scale: 0.9 }}
+      transition={{
+        duration: 0.6,
+        ease: [0.25, 0.1, 0.25, 1],
+        delay,
+      }}
+    >
       {/* Order ID */}
       <td className="whitespace-nowrap">
         <div className="flex items-center gap-3">
@@ -107,7 +118,7 @@ const OrderTable = ({ order, allOrder, setAllOrder }) => {
         </button>
         <Tooltip id="order-tooltip" />
       </td>
-    </tr>
+    </motion.tr>
   );
 };
 
