@@ -42,13 +42,13 @@ const UpdateProductPage = () => {
     updatedData.main_quantity = parseInt(updatedData.main_quantity);
     updatedData.min_sell_quantity = parseInt(updatedData.min_sell_quantity);
     updatedData.rating = parseInt(updatedData.rating);
-    updatedData.userEmail = user.email;
+    updatedData.userEmail = product.userEmail;
     axiosSecure
       .patch(`/product/${id}?email=${user?.email}`, updatedData)
       .then((data) => {
         if (data?.data?.modifiedCount > 0) {
           toast.success("Product Updated Successfully!");
-          navigate(`/myProduct`);
+          navigate(`/product/${id}`);
         } else {
           toast.error("No changes made or failed to update.");
         }
