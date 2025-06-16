@@ -84,7 +84,7 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
             </div>
           </div>
           <div>
-            <div className="font-bold">{order.productName}</div>
+            <div className="font-bold  text-wrap">{order.productName}</div>
             <div className="text-sm opacity-50">{order.productBrand}</div>
           </div>
         </div>
@@ -112,11 +112,11 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
           onClick={() => handleDelete(order._id)}
           className="text-xl text-secondary px-2 hover:scale-105 cursor-pointer"
           data-tooltip-id="order-tooltip"
-          data-tooltip-content="Delete Order"
+          data-tooltip-content="Delete Order history"
         >
           <MdDeleteOutline />
         </button>
-        <Tooltip id="order-tooltip" />
+        <Tooltip id="order-tooltip" place="top-start" />
       </td>
     </motion.tr>
   );

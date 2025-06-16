@@ -6,6 +6,7 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const ProductDetailsPage = () => {
   const params = useParams();
@@ -193,13 +194,22 @@ const ProductDetailsPage = () => {
               </span>
             </h2>
             <div className="flex items-center gap-4">
-              <button
-                onClick={() => handleChangeQuantity(quantity - 1)}
-                disabled={quantity <= min_sell_quantity}
-                className="btn btn-sm btn-circle text-xl btn-primary"
-              >
-                –
-              </button>
+              <div data-tooltip-id="decrease">
+                <button
+                  onClick={() => handleChangeQuantity(quantity - 1)}
+                  disabled={quantity <= min_sell_quantity}
+                  className="btn btn-sm btn-circle text-xl btn-primary"
+                >
+                  –
+                </button>
+                <ReactTooltip
+                  id="decrease"
+                  place="top-start"
+                  content={`${
+                    quantity <= min_sell_quantity ? "Minimum limit reached" : ""
+                  }`}
+                />
+              </div>
 
               <div className="relative w-10 h-10 overflow-hidden flex items-center justify-center">
                 <AnimatePresence mode="wait">
@@ -215,14 +225,22 @@ const ProductDetailsPage = () => {
                   </motion.span>
                 </AnimatePresence>
               </div>
-
-              <button
-                onClick={() => handleChangeQuantity(quantity + 1)}
-                disabled={quantity >= stock}
-                className="btn btn-sm btn-circle text-xl btn-primary"
-              >
-                +
-              </button>
+              <div data-tooltip-id="increase">
+                <button
+                  onClick={() => handleChangeQuantity(quantity + 1)}
+                  disabled={quantity >= stock}
+                  className="btn btn-sm btn-circle text-xl btn-primary"
+                >
+                  +
+                </button>
+                <ReactTooltip
+                  id="increase"
+                  place="top-start"
+                  content={`${
+                    quantity >= stock ? "Maximum stock reached" : ""
+                  }`}
+                />
+              </div>
             </div>
           </div>
 
@@ -254,16 +272,27 @@ const ProductDetailsPage = () => {
                   <div className="font-medium flex items-center gap-3">
                     Quantity :{/* Button for + and - */}
                     <div className="flex items-center gap-4">
-                      <button
-                        type="button"
-                        onClick={() => handleChangeQuantity(quantity - 1)}
-                        disabled={quantity <= min_sell_quantity}
-                        className={`btn btn-sm btn-circle text-xl btn-primary ${
-                          quantity <= min_sell_quantity ? "btn-disabled" : ""
-                        }`}
-                      >
-                        –
-                      </button>
+                      <span data-tooltip-id="decrease-checkout">
+                        <button
+                          type="button"
+                          onClick={() => handleChangeQuantity(quantity - 1)}
+                          disabled={quantity <= min_sell_quantity}
+                          className={`btn btn-sm btn-circle text-xl btn-primary ${
+                            quantity <= min_sell_quantity ? "btn-disabled" : ""
+                          }`}
+                        >
+                          –
+                        </button>
+                        <ReactTooltip
+                          id="decrease-checkout"
+                          place="top-start"
+                          content={`${
+                            quantity <= min_sell_quantity
+                              ? "Minimum limit reached"
+                              : ""
+                          }`}
+                        />
+                      </span>
 
                       <div className="relative w-10 h-10 overflow-hidden flex items-center justify-center">
                         <AnimatePresence mode="wait">
@@ -285,17 +314,25 @@ const ProductDetailsPage = () => {
                           </motion.span>
                         </AnimatePresence>
                       </div>
-
-                      <button
-                        type="button"
-                        onClick={() => handleChangeQuantity(quantity + 1)}
-                        disabled={quantity >= stock}
-                        className={`btn btn-sm btn-circle text-xl btn-primary ${
-                          quantity >= stock ? "btn-disabled" : ""
-                        }`}
-                      >
-                        +
-                      </button>
+                      <span data-tooltip-id="increase-checkout">
+                        <button
+                          type="button"
+                          onClick={() => handleChangeQuantity(quantity + 1)}
+                          disabled={quantity >= stock}
+                          className={`btn btn-sm btn-circle text-xl btn-primary ${
+                            quantity >= stock ? "btn-disabled" : ""
+                          }`}
+                        >
+                          +
+                        </button>
+                        <ReactTooltip
+                          id="increase-checkout"
+                          place="top-start"
+                          content={`${
+                            quantity >= stock ? "Maximum stock reached" : ""
+                          }`}
+                        />
+                      </span>
                     </div>
                   </div>
                   <p className="font-medium">

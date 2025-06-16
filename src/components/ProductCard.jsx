@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { MdEdit } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
 import { motion, useInView } from "framer-motion";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const ProductCard = ({ product }) => {
   const {
@@ -58,11 +59,13 @@ const ProductCard = ({ product }) => {
           </span>
 
           <Link
+            data-tooltip-id="edit"
             to={`/updateProduct/${_id}`}
             className="btn btn-circle bg-base-200 border-none opacity-60 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 right-2 text-lg text-secondary"
           >
             <MdEdit />
           </Link>
+          <ReactTooltip id="edit" place="top-start" content="Edit Product" />
         </div>
 
         {/* Card Content */}
