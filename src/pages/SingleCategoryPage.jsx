@@ -28,8 +28,6 @@ const SingleCategoryPage = () => {
         setLoading(false);
       });
   }, [axiosSecure, category, user?.email]);
-
-  console.log(category, products);
   if (loading) {
     return <LoaderDataFetch />;
   }

@@ -84,7 +84,9 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
             </div>
           </div>
           <div>
-            <div className="font-bold  text-wrap">{order.productName}</div>
+            <div className="font-bold min-w-60 text-wrap">
+              {order.productName}
+            </div>
             <div className="text-sm opacity-50">{order.productBrand}</div>
           </div>
         </div>

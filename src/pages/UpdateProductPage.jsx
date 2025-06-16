@@ -11,7 +11,6 @@ const UpdateProductPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
-  console.log(product);
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {

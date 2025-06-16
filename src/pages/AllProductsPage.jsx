@@ -43,7 +43,6 @@ const AllProductsPage = () => {
   if (loading) {
     return <LoaderDataFetch />;
   }
-  console.log(!displayedProducts.length);
   if (!displayedProducts) {
     return (
       <div className="container mx-auto px-4 font-poppins">

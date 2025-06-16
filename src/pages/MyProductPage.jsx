@@ -26,7 +26,7 @@ const MyProductPage = () => {
         setLoading(false);
       });
   }, [user.email, axiosSecure]);
-  console.log(products);
+
   if (loading) {
     return <LoaderDataFetch />;
   }

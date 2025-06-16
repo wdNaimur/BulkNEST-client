@@ -38,7 +38,7 @@ const CartPage = () => {
       </div>
       {allOrder.length ? (
         <div className="overflow-x-scroll rounded-box my-10 mx-auto">
-          <table className="table table-auto bg-base-100 w-fit mx-auto">
+          <table className="table table-auto bg-base-100 mx-auto">
             <thead>
               <tr>
                 <th>Product</th>

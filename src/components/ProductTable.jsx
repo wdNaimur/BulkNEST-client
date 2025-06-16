@@ -30,7 +30,7 @@ const ProductTable = ({ product, index }) => {
             </div>
           </div>
           <div className="rounded">
-            <h2 className="font-bold text-lg text-secondary">
+            <h2 className="font-bold text-lg text-secondary lg:min-w-full min-w-64 text-wrap">
               {product?.name}
             </h2>
             <p className="text-sm text-primary">{product?.brand}</p>
