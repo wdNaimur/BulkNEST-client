@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdCancel, MdDeleteOutline } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import Swal from "sweetalert2";
@@ -20,10 +20,10 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
   const { user } = use(AuthContext);
   const delay = index * 0.1;
 
-  const handleDelete = (id) => {
+  const handleDeleteHistory = (id) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "This order will be permanently deleted!",
+      title: "Delete History?",
+      text: "This order history will be permanently deleted and cannot be recovered!",
       icon: "warning",
       background: "rgba(61, 64, 91, 0.4)",
       color: "#f4f1ee",
@@ -43,7 +43,47 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`/orders/${id}?email=${user?.email}`)
+          .delete(`/orders/${id}?email=${user?.email}&type=delete`)
+          .then((data) => {
+            if (data.data.deletedCount) {
+              const remaining = allOrder.filter((item) => item._id !== id);
+              setAllOrder(remaining);
+              toast.success("Order history deleted successfully!");
+            } else {
+              toast.error("Failed to delete Order history!");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
+  const handleCancelOrder = (id) => {
+    Swal.fire({
+      title: "Cancel Order?",
+      text: "This order will be permanently cancelled and cannot be undone!",
+      icon: "warning",
+      background: "rgba(61, 64, 91, 0.4)",
+      color: "#f4f1ee",
+      showCancelButton: true,
+      confirmButtonColor: "#3d405b",
+      cancelButtonColor: "#0d9488",
+      cancelButtonText: "Close",
+      confirmButtonText: "Yes, Cancel Order",
+      customClass: {
+        popup: "blur-popup",
+      },
+      didOpen: () => {
+        document.querySelector(".blur-popup").style.backdropFilter =
+          "blur(8px)";
+        document.querySelector(".blur-popup").style.webkitBackdropFilter =
+          "blur(8px)";
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/orders/${id}?email=${user?.email}&type=cancel`)
           .then((data) => {
             if (data.data.deletedCount) {
               const remaining = allOrder.filter((item) => item._id !== id);
@@ -111,12 +151,20 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
       {/* Actions */}
       <td className="whitespace-nowrap text-center min-w-[80px]">
         <button
-          onClick={() => handleDelete(order._id)}
+          onClick={() => handleDeleteHistory(order._id)}
+          className="text-xl text-secondary px-2 hover:scale-105 cursor-pointer"
+          data-tooltip-id="order-tooltip"
+          data-tooltip-content="Delete Order History"
+        >
+          <MdDeleteOutline />
+        </button>
+        <button
+          onClick={() => handleCancelOrder(order._id)}
           className="text-xl text-secondary px-2 hover:scale-105 cursor-pointer"
           data-tooltip-id="order-tooltip"
           data-tooltip-content="Cancel Order"
         >
-          <MdDeleteOutline />
+          <MdCancel />
         </button>
         <Tooltip id="order-tooltip" place="top-start" />
       </td>
