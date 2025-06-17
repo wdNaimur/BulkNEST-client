@@ -114,7 +114,7 @@ const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
           onClick={() => handleDelete(order._id)}
           className="text-xl text-secondary px-2 hover:scale-105 cursor-pointer"
           data-tooltip-id="order-tooltip"
-          data-tooltip-content="Delete Order history"
+          data-tooltip-content="Cancel Order"
         >
           <MdDeleteOutline />
         </button>
