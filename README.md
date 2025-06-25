@@ -74,9 +74,9 @@ BulkNest is a B2B wholesale marketplace designed to simplify and streamline bulk
   npm run dev
   ```
 
+## Server Repository
 
-## Live Demo
+Explore the backend code here 👉 [BulkNEST Server](https://github.com/wdNaimur/bulknest-server)
 
-[Check out BulkNEST live!](https://bulknest.web.app/)
 
 <p align="center"><sub><strong>Designed & Developed by Md. Naimur Rahman</strong></sub></p>
