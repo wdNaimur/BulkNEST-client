@@ -45,6 +45,36 @@ BulkNest is a B2B wholesale marketplace designed to simplify and streamline bulk
 **Backend:**  
 `express`, `mongodb`, `firebase-admin`, `jsonwebtoken`, `cors`, `cookie-parser`, `dotenv`
 
+## 🛠️ BulkNest Client – Local Setup Instructions
+
+- **Clone the repository and install dependencies:**
+
+  ```bash
+  git clone https://github.com/wdNaimur/bulknest-client.git
+  cd bulknest-client
+  npm install
+  ```
+
+- **Create a `.env.local` file** in the project root and add the following environment variables:
+
+  ```
+  VITE_apiKey=your_firebase_apiKey
+  VITE_authDomain=your_firebase_authDomain
+  VITE_projectId=your_firebase_projectId
+  VITE_storageBucket=your_firebase_storageBucket
+  VITE_messagingSenderId=your_firebase_messagingSenderId
+  VITE_appId=your_firebase_appId
+
+  VITE_API_URL=your_backend_api_url
+  ```
+
+- **Run the development server:**
+
+  ```bash
+  npm run dev
+  ```
+
+
 ## Live Demo
 
 [Check out BulkNEST live!](https://bulknest.web.app/)
