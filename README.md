@@ -73,6 +73,9 @@ BulkNest is a B2B wholesale marketplace designed to simplify and streamline bulk
   ```bash
   npm run dev
   ```
+- **Access the client site locally at:**  
+`http://localhost:5173`
+
 
 ## 🌐 Live Frontend & Server Repository
 
