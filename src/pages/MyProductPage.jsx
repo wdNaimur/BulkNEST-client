@@ -40,7 +40,11 @@ const MyProductPage = () => {
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
         {products.length ? (
           products.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard
+              key={product._id}
+              product={product}
+              setProducts={setProducts}
+            />
           ))
         ) : (
           <div className="font-poppins col-span-full ">

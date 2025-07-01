@@ -4,6 +4,7 @@ import { AuthContext } from "../AuthContexts/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
 import ProductTable from "../components/ProductTable";
+import AllProductsCard from "../components/AllProductsCard";
 
 const AllProductsPage = () => {
   const { user } = useContext(AuthContext);
@@ -97,7 +98,7 @@ const AllProductsPage = () => {
         displayedProducts.length ? (
           <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
             {displayedProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+              <AllProductsCard key={product._id} product={product} />
             ))}
           </div>
         ) : (

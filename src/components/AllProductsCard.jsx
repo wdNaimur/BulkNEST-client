@@ -1,18 +1,9 @@
-import React, { useContext, useRef } from "react";
+import React from "react";
 import { Link } from "react-router";
-import { MdDelete, MdEdit } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
 import { motion, useInView } from "framer-motion";
-import { Tooltip as ReactTooltip } from "react-tooltip";
-import { AuthContext } from "../AuthContexts/AuthContext";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
-import toast from "react-hot-toast";
 
-const ProductCard = ({ product, setProducts }) => {
-  const axiosSecure = useAxiosSecure();
-  const { user } = useContext(AuthContext);
-
+const AllProductsCard = ({ product }) => {
   const {
     brand,
     description,
@@ -24,47 +15,8 @@ const ProductCard = ({ product, setProducts }) => {
     rating,
     _id,
   } = product;
-
-  const ref = useRef(null);
+  const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "0px 0px -20px 0px" });
-
-  const handleDeleteProduct = (id) => {
-    Swal.fire({
-      title: "Delete product?",
-      text: "Are you sure you want to delete this product?",
-      icon: "warning",
-      background: "rgba(17, 24, 39, 0.4)",
-      color: "#f9fafb",
-      showCancelButton: true,
-      confirmButtonColor: "#d9534f",
-      cancelButtonColor: "#0d9488  ",
-      confirmButtonText: "Yes, delete it!",
-      customClass: {
-        popup: "blur-popup",
-      },
-      didOpen: () => {
-        document.querySelector(".blur-popup").style.backdropFilter =
-          "blur(8px)";
-      },
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const res = await axiosSecure.delete(
-            `/product/${id}?email=${user.email}`
-          );
-          if (res.status === 200 && res.data.deletedCount > 0) {
-            toast.success("Product deleted successfully");
-            setProducts((prev) => prev.filter((product) => product._id !== id));
-          } else {
-            toast.error("Failed to delete product. Please try again.");
-          }
-        } catch (error) {
-          console.error("Error while deleting product:", error);
-          toast.error("An error occurred while deleting the product.");
-        }
-      }
-    });
-  };
 
   return (
     <motion.div
@@ -85,7 +37,7 @@ const ProductCard = ({ product, setProducts }) => {
             <img
               src={image}
               alt={name}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 bg-primary/10"
             />
           </div>
 
@@ -102,29 +54,6 @@ const ProductCard = ({ product, setProducts }) => {
               />
             </p>
           </span>
-
-          <Link
-            data-tooltip-id="edit"
-            to={`/updateProduct/${_id}`}
-            className="btn btn-circle bg-base-200 border-none opacity-60 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 right-2 text-lg text-secondary"
-          >
-            <MdEdit />
-          </Link>
-          <ReactTooltip id="edit" place="top-start" content="Edit Product" />
-
-          <button
-            type="button"
-            data-tooltip-id="delete"
-            onClick={() => handleDeleteProduct(_id)}
-            className="btn btn-circle bg-base-200 border-none opacity-60 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 left-2 text-lg text-secondary"
-          >
-            <MdDelete />
-          </button>
-          <ReactTooltip
-            id="delete"
-            place="top-start"
-            content="Delete Product"
-          />
         </div>
 
         {/* Card Content */}
@@ -163,16 +92,26 @@ const ProductCard = ({ product, setProducts }) => {
             </div>
           </div>
 
-          <Link
-            to={`/product/${_id}`}
-            className="w-full btn btn-secondary text-base-100 inline-block text-center"
-          >
-            View Details
-          </Link>
+          <div>
+            <button className="w-full mb-1">
+              <Link
+                to={`/product/${_id}`}
+                className="w-full btn btn-secondary text-base-100"
+              >
+                View Details
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>
   );
 };
 
-export default ProductCard;
+export default AllProductsCard;
+
+{
+  /* <span className="font-poppins inline-flex items-center rounded-md bg-primary/80 px-2 py-1 text-xs font-medium text-base-100">
+                  {category}
+                </span> */
+}
