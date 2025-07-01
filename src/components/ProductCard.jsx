@@ -15,7 +15,6 @@ const ProductCard = ({ product, setProducts }) => {
 
   const {
     brand,
-    description,
     image,
     main_quantity,
     min_sell_quantity,
@@ -136,12 +135,6 @@ const ProductCard = ({ product, setProducts }) => {
                   {name} | {brand}
                 </h3>
               </div>
-              <p className="text-sm opacity-80 mb-2">
-                {description?.length > 60
-                  ? description.slice(0, 55).split(" ").slice(0, -1).join(" ") +
-                    "..."
-                  : description}
-              </p>
             </div>
 
             <div className="text-sm space-y-1 mb-4 grid grid-cols-2 divide-x-2 divide-dashed divide-primary/40">
@@ -176,3 +169,10 @@ const ProductCard = ({ product, setProducts }) => {
 };
 
 export default ProductCard;
+
+//  <p className="text-sm opacity-80 mb-2">
+//                 {description?.length > 60
+//                   ? description.slice(0, 55).split(" ").slice(0, -1).join(" ") +
+//                     "..."
+//                   : description}
+//               </p>
