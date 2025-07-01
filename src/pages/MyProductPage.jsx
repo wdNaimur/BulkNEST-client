@@ -37,7 +37,7 @@ const MyProductPage = () => {
         <p className="opacity-70">Explore your added products.</p>
       </div>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
+      <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
         {products.length ? (
           products.map((product) => (
             <ProductCard

@@ -81,7 +81,7 @@ const ProductCard = ({ product, setProducts }) => {
       <div className="rounded-box shadow-sm group-hover:shadow-xl w-full bg-base-100 text-secondary flex flex-col mx-auto h-full group-hover:scale-[1.02] group-hover:-translate-y-1.5 transition-all">
         {/* Image */}
         <div className="relative">
-          <div className="rounded-t-box xl:h-72 h-56 w-full mb-4 overflow-hidden">
+          <div className="rounded-t-box xl:h-64 h-56 w-full mb-4 overflow-hidden">
             <img
               src={image}
               alt={name}

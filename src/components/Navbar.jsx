@@ -55,7 +55,7 @@ const Navbar = () => {
         { path: "/categories", label: "Categories" },
         { path: "/allProduct", label: "All products" },
         { path: "/addProduct", label: "Add product" },
-        { path: "/myProduct", label: "My product" },
+        { path: "/myProduct", label: "My products" },
       ];
 
   const navLinks = links.map((link) => (
