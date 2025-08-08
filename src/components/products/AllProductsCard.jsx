@@ -6,7 +6,6 @@ import { motion, useInView } from "framer-motion";
 const AllProductsCard = ({ product }) => {
   const {
     brand,
-    description,
     image,
     main_quantity,
     min_sell_quantity,

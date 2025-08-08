@@ -6,13 +6,14 @@ import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import AddProductPage from "../pages/AddProductPage";
 import PrivateRoute from "./PrivateRoute";
-import AllProductsPage from "../pages/AllProductsPage";
+
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import MyProductPage from "../pages/MyProductPage";
 import CartPage from "../pages/CartPage";
 import UpdateProductPage from "../pages/UpdateProductPage";
 import CategoriesPage from "../pages/CategoriesPage";
 import SingleCategoryPage from "../pages/SingleCategoryPage";
+import AllProductsPage from "../pages/Products/AllProductsPage";
 
 const router = createBrowserRouter([
   {
