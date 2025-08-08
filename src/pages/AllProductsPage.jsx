@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import ProductCard from "../components/ProductCard";
 import { AuthContext } from "../AuthContexts/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoaderDataFetch from "../UI/LoaderDataFetch";
@@ -22,9 +21,8 @@ const AllProductsPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!user?.email) return;
     setProductsLoading(true);
-    axiosSecure(`/products/${user.email}?available=${available}`)
+    axiosSecure(`/products/?available=${available}`)
       .then((res) => {
         setDisplayedProducts(res?.data || []);
       })

@@ -23,7 +23,7 @@ const ProductDetailsPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure(`/product/${params.id}?email=${user?.email}`)
+    axiosSecure(`/product/${params.id}`)
       .then((data) => {
         const productData = data.data;
         setProduct(productData);
@@ -35,7 +35,7 @@ const ProductDetailsPage = () => {
         // toast.error("Failed to fetch product", err);
         setLoading(false);
       });
-  }, [axiosSecure, params.id, user?.email]);
+  }, [axiosSecure, params.id]);
 
   useEffect(() => {
     if (product) {
@@ -352,7 +352,7 @@ const ProductDetailsPage = () => {
                       type="text"
                       name="fullName"
                       required
-                      defaultValue={user.displayName}
+                      defaultValue={user?.displayName}
                       readOnly={true}
                       className="input border-none bg-primary/10 w-full focus:outline-primary/40"
                       placeholder="Enter your full name"
@@ -365,7 +365,7 @@ const ProductDetailsPage = () => {
                       type="email"
                       name="email"
                       required
-                      defaultValue={user.email}
+                      defaultValue={user?.email}
                       readOnly={true}
                       className="input border-none bg-primary/10 w-full focus:outline-primary/40"
                       placeholder="Enter your email address"

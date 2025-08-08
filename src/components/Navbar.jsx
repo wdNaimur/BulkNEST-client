@@ -49,6 +49,7 @@ const Navbar = () => {
     ? [
         { path: "/", label: "Home" },
         { path: "/categories", label: "Categories" },
+        { path: "/allProduct", label: "All products" },
       ]
     : [
         { path: "/", label: "Home" },

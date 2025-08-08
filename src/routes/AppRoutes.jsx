@@ -47,20 +47,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/categories/:category",
-        element: (
-          <PrivateRoute>
-            <SingleCategoryPage />
-          </PrivateRoute>
-        ),
+        element: <SingleCategoryPage />,
       },
 
       {
         path: "/allProduct",
-        element: (
-          <PrivateRoute>
-            <AllProductsPage />
-          </PrivateRoute>
-        ),
+        element: <AllProductsPage />,
       },
 
       {
@@ -81,11 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: (
-          <PrivateRoute>
-            <ProductDetailsPage />
-          </PrivateRoute>
-        ),
+        element: <ProductDetailsPage />,
       },
       {
         path: "/updateProduct/:id",
