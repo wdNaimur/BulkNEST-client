@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { AuthContext } from "../AuthContexts/AuthContext";
+import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import LoaderDataFetch from "../UI/LoaderDataFetch";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import { AuthContext } from "../../context/AuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoaderDataFetch from "../../components/common/LoaderDataFetch";
 
 const ProductDetailsPage = () => {
   const params = useParams();

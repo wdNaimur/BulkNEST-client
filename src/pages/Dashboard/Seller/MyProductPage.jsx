@@ -1,9 +1,9 @@
 import React, { use, useEffect, useState } from "react";
-import { AuthContext } from "../AuthContexts/AuthContext";
-import LoaderDataFetch from "../UI/LoaderDataFetch";
-import ProductCard from "../components/ProductCard";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Link } from "react-router";
+import { AuthContext } from "../../../context/AuthContext";
+import LoaderDataFetch from "../../../components/common/LoaderDataFetch";
+import ProductCard from "../../../components/products/ProductCard";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyProductPage = () => {
   const { user } = use(AuthContext);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { AuthContext } from "../AuthContexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { AuthContext } from "../../context/AuthContext";
 
 const Profile = ({ user }) => {
   const { userSignOut } = React.useContext(AuthContext);

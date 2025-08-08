@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../AuthContexts/AuthContext";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import LoaderDataFetch from "../../UI/LoaderDataFetch";
-import ProductTable from "../../components/ProductTable";
+import LoaderDataFetch from "../../components/common/LoaderDataFetch";
+import ProductTable from "../../components/products/ProductTable";
 import AllProductsCard from "../../components/products/AllProductsCard";
+import { AuthContext } from "../../context/AuthContext";
 
 const AllProductsPage = () => {
   const { user } = useContext(AuthContext);

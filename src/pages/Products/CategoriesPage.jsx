@@ -33,7 +33,7 @@ const featuredCategories = [
   },
 ];
 
-const FeaturedCategories = () => {
+const CategoriesPage = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
 
@@ -138,4 +138,4 @@ const FeaturedCategories = () => {
   );
 };
 
-export default FeaturedCategories;
+export default CategoriesPage;

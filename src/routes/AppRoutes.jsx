@@ -1,19 +1,18 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayout from "../layouts/HomeLayout";
-import HomePage from "../pages/HomePage";
-import ErrorPage from "../layouts/ErrorPage";
-import SignInPage from "../pages/SignInPage";
-import SignUpPage from "../pages/SignUpPage";
-import AddProductPage from "../pages/AddProductPage";
-import PrivateRoute from "./PrivateRoute";
-
-import ProductDetailsPage from "../pages/ProductDetailsPage";
-import MyProductPage from "../pages/MyProductPage";
-import CartPage from "../pages/CartPage";
-import UpdateProductPage from "../pages/UpdateProductPage";
-import CategoriesPage from "../pages/CategoriesPage";
-import SingleCategoryPage from "../pages/SingleCategoryPage";
+import ErrorPage from "../pages/Error/ErrorPage";
+import HomePage from "../pages/Home/HomePage";
+import SignInPage from "../pages/Auth/SignInPage";
+import SignUpPage from "../pages/Auth/SignUpPage";
+import AddProductPage from "../pages/Dashboard/Seller/AddProductPage";
+import CategoriesPage from "../pages/Products/CategoriesPage";
+import SingleCategoryPage from "../pages/Products/SingleCategoryPage";
 import AllProductsPage from "../pages/Products/AllProductsPage";
+import MyProductPage from "../pages/Dashboard/Seller/MyProductPage";
+import CartPage from "../pages/Cart/CartPage";
+import ProductDetailsPage from "../pages/Products/ProductDetailsPage";
+import UpdateProductPage from "../pages/Dashboard/Seller/UpdateProductPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {

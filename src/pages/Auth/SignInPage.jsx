@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { AuthContext } from "../AuthContexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import ErrorText from "../UI/ErrorText";
+import { AuthContext } from "../../context/AuthContext";
+import ErrorText from "../../components/common/ErrorText";
 
 const SignInPage = () => {
   const { userSignIn, googleSignIn, user } = useContext(AuthContext);

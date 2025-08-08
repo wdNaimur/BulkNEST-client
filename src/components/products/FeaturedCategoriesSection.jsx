@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { motion, useInView } from "framer-motion";
 
-const CategoriesSection = () => {
+const FeaturedCategoriesSection = () => {
   const featuredCategories = [
     {
       category: "Electronics & Gadgets",
@@ -139,4 +139,4 @@ const CategoriesSection = () => {
   );
 };
 
-export default CategoriesSection;
+export default FeaturedCategoriesSection;

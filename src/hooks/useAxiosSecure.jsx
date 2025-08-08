@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthContext";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import { AuthContext } from "../AuthContexts/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Footer = () => {
   const { user } = useContext(AuthContext);

@@ -2,7 +2,8 @@ import React from "react";
 import { FaUserPlus, FaBoxOpen, FaShippingFast } from "react-icons/fa";
 import { MdOutlineHandshake } from "react-icons/md";
 import { motion, useInView } from "framer-motion";
-import Step from "./Step";
+import Step from "./HowItWorksStepCard";
+import HowItWorksStepCard from "./HowItWorksStepCard";
 
 const HowItWorks = () => {
   const steps = [
@@ -59,7 +60,7 @@ const HowItWorks = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step) => (
-            <Step key={step.id} step={step} />
+            <HowItWorksStepCard key={step.id} step={step} />
           ))}
         </div>
       </div>

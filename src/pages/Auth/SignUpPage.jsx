@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-import ErrorText from "../UI/ErrorText";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { AuthContext } from "../AuthContexts/AuthContext";
 import { motion, useInView } from "framer-motion";
+import ErrorText from "../../components/common/ErrorText";
+import { AuthContext } from "../../context/AuthContext";
 
 const SignUpPage = () => {
   const { createUser, setUser, updateUser, googleSignIn, user } =

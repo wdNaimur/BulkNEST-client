@@ -1,6 +1,6 @@
 import React from "react";
 
-const Step = ({ step }) => {
+const HowItWorksStepCard = ({ step }) => {
   return (
     <div className="bg-base-200 text-secondary rounded-2xl p-6 shadow-sm relative hover:scale-[1.02] hover:shadow-xl shadow-primary/5 transition-transform duration-300 cursor-default overflow-hidden">
       <div className="flex flex-col justify-center items-center">
@@ -15,4 +15,4 @@ const Step = ({ step }) => {
   );
 };
 
-export default Step;
+export default HowItWorksStepCard;

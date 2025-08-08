@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, NavLink } from "react-router";
-import { AuthContext } from "../AuthContexts/AuthContext";
 import toast from "react-hot-toast";
 import Profile from "./Profile";
 import { IoCartOutline } from "react-icons/io5";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { user, userSignOut } = useContext(AuthContext);

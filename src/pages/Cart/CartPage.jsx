@@ -1,10 +1,9 @@
 import React, { use, useEffect, useState } from "react";
 import { Link } from "react-router";
-import OrderTable from "../components/OrderTable";
-import { AuthContext } from "../AuthContexts/AuthContext";
-import LoaderDataFetch from "../UI/LoaderDataFetch";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AnimatePresence } from "framer-motion";
+import { AuthContext } from "../../context/AuthContext";
+import LoaderDataFetch from "../../components/common/LoaderDataFetch";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const CartPage = () => {
   useEffect(() => {

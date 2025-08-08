@@ -1,11 +1,11 @@
 import React, { use } from "react";
 import { Outlet, useNavigation } from "react-router";
-import Navbar from "../components/Navbar";
-import { AuthContext } from "../AuthContexts/AuthContext";
-import Loader from "../UI/Loader";
+import Loader from "../components/common/Loader";
 import { Toaster } from "react-hot-toast";
-import LoaderDataFetch from "../UI/LoaderDataFetch";
-import Footer from "../components/Footer";
+import LoaderDataFetch from "../components/common/LoaderDataFetch";
+import Footer from "../components/navigation/Footer";
+import { AuthContext } from "../context/AuthContext";
+import Navbar from "../components/navigation/Navbar";
 
 const HomeLayout = () => {
   const { loading } = use(AuthContext);

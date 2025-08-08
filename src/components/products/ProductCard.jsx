@@ -4,10 +4,10 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
 import { motion, useInView } from "framer-motion";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import { AuthContext } from "../AuthContexts/AuthContext";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
 
 const ProductCard = ({ product, setProducts }) => {
   const axiosSecure = useAxiosSecure();

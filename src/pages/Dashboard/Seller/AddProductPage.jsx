@@ -1,90 +1,70 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { AuthContext } from "../AuthContexts/AuthContext";
-import LoaderDataFetch from "../UI/LoaderDataFetch";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import { motion } from "framer-motion";
+import { use } from "react";
+import { motion, useInView } from "framer-motion";
+import { AuthContext } from "../../../context/AuthContext";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const UpdateProductPage = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const axiosSecure = useAxiosSecure();
+const AddProductPage = () => {
   useEffect(() => {
-    document.title = "BulkNEST | Update Product";
+    document.title = "BulkNEST | Add Product";
     window.scrollTo(0, 0);
   }, []);
-  useEffect(() => {
-    setLoading(true);
-    axiosSecure(`/product/${id}?email=${user?.email}`)
-      .then((data) => {
-        setProduct(data.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("This product doesn't exist.");
-        setLoading(false);
-      });
-  }, [id, axiosSecure, user.email]);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
 
-  const handleUpdateProduct = async (e) => {
+  const navigate = useNavigate();
+  const { user } = use(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
+  const handleAddProduct = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const updatedData = Object.fromEntries(formData.entries());
+    const productData = Object.fromEntries(formData.entries());
 
-    updatedData.price = parseFloat(updatedData.price);
-    updatedData.main_quantity = parseInt(updatedData.main_quantity);
-    updatedData.min_sell_quantity = parseInt(updatedData.min_sell_quantity);
-    updatedData.rating = parseInt(updatedData.rating);
-    updatedData.userEmail = product.userEmail;
+    productData.price = parseFloat(productData.price);
+    productData.main_quantity = parseInt(productData.main_quantity);
+    productData.min_sell_quantity = parseInt(productData.min_sell_quantity);
+    productData.rating = parseInt(productData.rating);
+    productData.userEmail = user.email;
+    productData.review = [];
+
     axiosSecure
-      .patch(`/product/${id}?email=${user?.email}`, updatedData)
-      .then((data) => {
-        if (data?.data?.modifiedCount > 0) {
-          toast.success("Product Updated Successfully!");
-          navigate(`/product/${id}`);
+      .post(`/products/${user.email}`, productData)
+      .then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Product Added Successfully!");
+          form.reset();
+          navigate(`/myProduct`);
         } else {
-          toast.error("No changes made or failed to update.");
+          toast.error("Failed to add product.");
         }
       })
-      .catch(() => toast.error("Server Error!"));
+      .catch((err) => {
+        console.error(err);
+        toast.error("Server Error!");
+      });
   };
-  if (loading) {
-    return <LoaderDataFetch />;
-  }
-  if (!product) {
-    return (
-      <div className="container mx-auto px-4 font-poppins">
-        <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">
-          <h1 className="text-2xl font-medium text-center text-primary">
-            Product Not Found
-          </h1>
-          <p className="text-center  mx-auto opacity-80 px-4">
-            The product you are looking for does not exist or may have been
-            removed. Please check the URL or return to the product listing to
-            browse available items.
-          </p>
-        </div>
-      </div>
-    );
-  }
+
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">
-        <h2 className="text-4xl font-bold text-primary">Update Product</h2>
-        <p className="opacity-70">Update the product details below.</p>
+        <h2 className="text-4xl font-bold text-primary">Add Product</h2>
+        <p className="opacity-70">Fill in the product details below.</p>
       </div>
       <motion.form
+        ref={ref}
         initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }
+            : { opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }
+        }
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        onSubmit={handleUpdateProduct}
-        className="bg-base-100 p-8 rounded-box mt-8 space-y-6 shadow-md shadow-primary/5"
+        onSubmit={handleAddProduct}
+        className="bg-base-100 p-4 rounded-box mt-8 space-y-6 shadow-md shadow-primary/10 border border-primary/5"
       >
         <div className="grid md:grid-cols-2 gap-6">
           <div className="form-control w-full">
@@ -92,8 +72,8 @@ const UpdateProductPage = () => {
             <input
               name="image"
               type="url"
-              defaultValue={product.image}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., https://example.com/product.jpg"
               required
             />
           </div>
@@ -103,8 +83,8 @@ const UpdateProductPage = () => {
             <input
               name="name"
               type="text"
-              defaultValue={product.name}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., Wireless Mouse"
               required
             />
           </div>
@@ -114,8 +94,8 @@ const UpdateProductPage = () => {
             <input
               name="main_quantity"
               type="number"
-              defaultValue={product.main_quantity}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., 500"
               required
             />
           </div>
@@ -127,8 +107,8 @@ const UpdateProductPage = () => {
             <input
               name="min_sell_quantity"
               type="number"
-              defaultValue={product.min_sell_quantity}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., 50"
               required
             />
           </div>
@@ -138,8 +118,8 @@ const UpdateProductPage = () => {
             <input
               name="brand"
               type="text"
-              defaultValue={product.brand}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., Logitech"
               required
             />
           </div>
@@ -148,7 +128,6 @@ const UpdateProductPage = () => {
             <label className="label text-secondary mb-1">Category</label>
             <select
               name="category"
-              defaultValue={product.category}
               className="select border-none bg-base-100 w-full focus:outline-primary/40"
               required
             >
@@ -171,8 +150,8 @@ const UpdateProductPage = () => {
               name="price"
               type="number"
               step="0.01"
-              defaultValue={product.price}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., 24.99"
               required
             />
           </div>
@@ -184,8 +163,8 @@ const UpdateProductPage = () => {
               type="number"
               min="1"
               max="5"
-              defaultValue={product.rating}
               className="input border-none bg-primary/10 w-full focus:outline-primary/40"
+              placeholder="e.g., 4"
               required
             />
           </div>
@@ -195,18 +174,18 @@ const UpdateProductPage = () => {
           <label className="label text-secondary mb-1">Short Description</label>
           <textarea
             name="description"
-            defaultValue={product.description}
             className="textarea border-none bg-primary/10 w-full focus:outline-primary/40 resize-none"
+            placeholder="e.g., A lightweight, ergonomic wireless mouse with USB receiver..."
             required
           ></textarea>
         </div>
 
         <button className="btn btn-primary w-full mt-4 text-base-100">
-          Update Product
+          Add Product
         </button>
       </motion.form>
     </div>
   );
 };
 
-export default UpdateProductPage;
+export default AddProductPage;

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Banner from "../components/Banner";
-import HowItWorks from "../components/HowItWorks";
-import FAQSection from "../components/FAQSection";
-import CategoriesSection from "../components/CategoriesSection";
+import Banner from "../../components/home/Banner";
+import HowItWorks from "../../components/home/HowItWorks";
+import FeaturedCategoriesSection from "../../components/products/FeaturedCategoriesSection";
+import FAQSection from "../../components/home/FAQSection";
 
 const HomePage = () => {
   useEffect(() => {
@@ -19,7 +19,7 @@ const HomePage = () => {
         <HowItWorks />
       </section>
       <section>
-        <CategoriesSection />
+        <FeaturedCategoriesSection />
       </section>
       <section>
         <FAQSection />
