@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { FaArrowLeft, FaArrowRight, FaQuoteLeft } from "react-icons/fa";
 import "./testimonial.css";
+import HomeSectionHeader from "../common/HomeSectionHeader";
 
 const testimonials = [
   {
@@ -125,14 +126,10 @@ const Testimonial = () => {
 
   return (
     <div className="py-8 text-center relative bg-base-100">
-      <div className="mb-12">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-secondary">
-          Testimonials
-        </h2>
-        <p className="opacity-80 px-4">
-          Trusted by farmers, buyers, and delivery heroes across the country.
-        </p>
-      </div>
+      <HomeSectionHeader
+        title="Testimonials"
+        subtitle="Powering success for businesses, suppliers, and delivery networks across Bangladesh."
+      />
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         onSwiper={(swiper) => {

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/AuthContext";
 import { motion } from "framer-motion";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import LoaderDataFetch from "../../../components/common/LoaderDataFetch";
 
 const UpdateProductPage = () => {
   const { id } = useParams();

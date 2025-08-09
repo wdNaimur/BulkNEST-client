@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
 
-const ProductCard = ({ product, setProducts }) => {
+const ActionProductCard = ({ product, setProducts }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
 
@@ -77,7 +77,7 @@ const ProductCard = ({ product, setProducts }) => {
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       className="w-full h-full group"
     >
-      <div className="rounded-box shadow-sm group-hover:shadow-xl w-full bg-base-100 text-secondary flex flex-col mx-auto h-full group-hover:scale-[1.02] group-hover:-translate-y-1.5 transition-all">
+      <div className="rounded-box shadow-lg shadow-primary/10 group-hover:shadow-xl w-full bg-base-100 text-secondary flex flex-col mx-auto h-full group-hover:scale-[1.02] group-hover:-translate-y-1.5 transition-all">
         {/* Image */}
         <div className="relative">
           <div className="rounded-t-box xl:h-64 h-56 w-full mb-4 overflow-hidden">
@@ -156,19 +156,21 @@ const ProductCard = ({ product, setProducts }) => {
             </div>
           </div>
 
-          <Link
-            to={`/product/${_id}`}
-            className="w-full btn btn-secondary text-base-100 inline-block text-center"
-          >
-            View Details
-          </Link>
+          <button className="w-full mb-1">
+            <Link
+              to={`/product/${_id}`}
+              className="w-full btn btn-secondary text-base-100"
+            >
+              View Details
+            </Link>
+          </button>
         </div>
       </div>
     </motion.div>
   );
 };
 
-export default ProductCard;
+export default ActionProductCard;
 
 //  <p className="text-sm opacity-80 mb-2">
 //                 {description?.length > 60

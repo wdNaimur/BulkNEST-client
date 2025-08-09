@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +13,7 @@ const ProductDetailsPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(0);
@@ -246,17 +246,34 @@ const ProductDetailsPage = () => {
 
           {/* Buy Button */}
           <div className="mt-4">
-            <button
-              className={`btn btn-primary ${
-                stock < min_sell_quantity
-                  ? "text-secondary-100"
-                  : "text-base-100"
-              }`}
-              disabled={stock < min_sell_quantity}
-              onClick={() => document.getElementById("my_modal_2").showModal()}
-            >
-              {stock < min_sell_quantity ? "Not Available" : "Buy Now"}
-            </button>
+            {user ? (
+              <button
+                className={`btn btn-primary ${
+                  stock < min_sell_quantity
+                    ? "text-secondary-100"
+                    : "text-base-100"
+                }`}
+                disabled={stock < min_sell_quantity}
+                onClick={() =>
+                  document.getElementById("my_modal_2").showModal()
+                }
+              >
+                {stock < min_sell_quantity ? "Not Available" : "Buy Now"}
+              </button>
+            ) : (
+              <Link
+                className={`btn btn-primary ${
+                  stock < min_sell_quantity
+                    ? "text-secondary-100"
+                    : "text-base-100"
+                }`}
+                disabled={stock < min_sell_quantity}
+                to={"/signIn"}
+                state={{ from: location.pathname }}
+              >
+                {stock < min_sell_quantity ? "Not Available" : "Sign In to buy"}
+              </Link>
+            )}
 
             {/* Modal */}
             <dialog id="my_modal_2" className="modal">

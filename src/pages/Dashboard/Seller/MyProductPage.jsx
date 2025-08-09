@@ -2,8 +2,8 @@ import React, { use, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../../context/AuthContext";
 import LoaderDataFetch from "../../../components/common/LoaderDataFetch";
-import ProductCard from "../../../components/products/ProductCard";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import ActionProductCard from "../../../components/products/ActionProductCard";
 
 const MyProductPage = () => {
   const { user } = use(AuthContext);
@@ -40,7 +40,7 @@ const MyProductPage = () => {
       <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
         {products.length ? (
           products.map((product) => (
-            <ProductCard
+            <ActionProductCard
               key={product._id}
               product={product}
               setProducts={setProducts}

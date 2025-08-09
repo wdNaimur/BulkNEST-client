@@ -2,13 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoaderDataFetch from "../../components/common/LoaderDataFetch";
 import ProductTable from "../../components/products/ProductTable";
-import AllProductsCard from "../../components/products/AllProductsCard";
 import { AuthContext } from "../../context/AuthContext";
+import AllProductsPageCard from "../../components/products/AllProductsPageCard";
 
 const AllProductsPage = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-
   const [loading, setLoading] = useState(true);
   const [productsLoading, setProductsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState([]);
@@ -96,7 +95,7 @@ const AllProductsPage = () => {
         displayedProducts.length ? (
           <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
             {displayedProducts.map((product) => (
-              <AllProductsCard key={product._id} product={product} />
+              <AllProductsPageCard key={product._id} product={product} />
             ))}
           </div>
         ) : (

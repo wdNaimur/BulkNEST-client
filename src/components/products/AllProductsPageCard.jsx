@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Rating } from "react-simple-star-rating";
 import { motion, useInView } from "framer-motion";
 
-const AllProductsCard = ({ product }) => {
+const AllProductsPageCard = ({ product }) => {
   const {
     brand,
     image,
@@ -29,7 +29,7 @@ const AllProductsCard = ({ product }) => {
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       className="w-full h-full group"
     >
-      <div className="rounded-box shadow-sm group-hover:shadow-xl w-full bg-base-100 text-secondary flex flex-col mx-auto h-full group-hover:scale-[1.02] group-hover:-translate-y-1.5 transition-all">
+      <div className="rounded-box shadow-lg shadow-primary/10 group-hover:shadow-xl w-full bg-base-100 text-secondary flex flex-col mx-auto h-full group-hover:scale-[1.02] group-hover:-translate-y-1.5 transition-all">
         {/* Image */}
         <div className="relative">
           <div className="rounded-t-box xl:h-64 h-56 w-full mb-4 overflow-hidden">
@@ -101,7 +101,7 @@ const AllProductsCard = ({ product }) => {
   );
 };
 
-export default AllProductsCard;
+export default AllProductsPageCard;
 
 {
   /* <span className="font-poppins inline-flex items-center rounded-md bg-primary/80 px-2 py-1 text-xs font-medium text-base-100">

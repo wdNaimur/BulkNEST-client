@@ -2,9 +2,9 @@ import React, { use, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useParams } from "react-router";
 import LoaderDataFetch from "../../components/common/LoaderDataFetch";
-import ProductCard from "../../components/products/ProductCard";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../context/AuthContext";
+import AllProductsPageCard from "../../components/products/AllProductsPageCard";
 
 const SingleCategoryPage = () => {
   const { category } = useParams();
@@ -66,7 +66,7 @@ const SingleCategoryPage = () => {
       {products?.length ? (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
           {products.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <AllProductsPageCard key={product._id} product={product} />
           ))}
         </div>
       ) : (
