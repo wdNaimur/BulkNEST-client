@@ -4,9 +4,9 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { AuthContext } from "../AuthContexts/AuthContext";
 import { motion } from "framer-motion";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { AuthContext } from "../../context/AuthContext";
 
 const OrderTable = ({ order, allOrder, setAllOrder, index }) => {
   const orderDate = new Date(order.date);

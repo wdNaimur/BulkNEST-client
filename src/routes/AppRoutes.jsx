@@ -4,65 +4,32 @@ import ErrorPage from "../pages/Error/ErrorPage";
 import HomePage from "../pages/Home/HomePage";
 import SignInPage from "../pages/Auth/SignInPage";
 import SignUpPage from "../pages/Auth/SignUpPage";
-import AddProductPage from "../pages/Dashboard/Seller/AddProductPage";
 import CategoriesPage from "../pages/Products/CategoriesPage";
+import PrivateRoute from "./PrivateRoute";
 import SingleCategoryPage from "../pages/Products/SingleCategoryPage";
 import AllProductsPage from "../pages/Products/AllProductsPage";
-import MyProductPage from "../pages/Dashboard/Seller/MyProductPage";
 import CartPage from "../pages/Cart/CartPage";
 import ProductDetailsPage from "../pages/Products/ProductDetailsPage";
-import UpdateProductPage from "../pages/Dashboard/Seller/UpdateProductPage";
-import PrivateRoute from "./PrivateRoute";
+import DashBoardLayout from "../layouts/DashBoardLayout";
+// import MyProductPage from "../pages/Dashboard/Seller/MyProductPage";
+// import AddProductPage from "../pages/Dashboard/Seller/AddProductPage";
+// import UpdateProductPage from "../pages/Dashboard/Seller/UpdateProductPage";
+
+// import Overview from "../pages/Dashboard/Overview/Overview";
 
 const router = createBrowserRouter([
+  //Home Section
   {
     path: "/",
     element: <HomeLayout />,
-
     errorElement: <ErrorPage />,
     children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "/signIn",
-        element: <SignInPage />,
-      },
-      {
-        path: "/signUp",
-        element: <SignUpPage />,
-      },
-      {
-        path: "/addProduct",
-        element: (
-          <PrivateRoute>
-            <AddProductPage />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/categories",
-        element: <CategoriesPage />,
-      },
-      {
-        path: "/categories/:category",
-        element: <SingleCategoryPage />,
-      },
-
-      {
-        path: "/allProduct",
-        element: <AllProductsPage />,
-      },
-
-      {
-        path: "/myProduct",
-        element: (
-          <PrivateRoute>
-            <MyProductPage />
-          </PrivateRoute>
-        ),
-      },
+      { index: true, element: <HomePage /> },
+      { path: "/signIn", element: <SignInPage /> },
+      { path: "/signUp", element: <SignUpPage /> },
+      { path: "/categories", element: <CategoriesPage /> },
+      { path: "/categories/:category", element: <SingleCategoryPage /> },
+      { path: "/allProduct", element: <AllProductsPage /> },
       {
         path: "/cart",
         element: (
@@ -71,19 +38,45 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/product/:id",
-        element: <ProductDetailsPage />,
-      },
-      {
-        path: "/updateProduct/:id",
-        element: (
-          <PrivateRoute>
-            <UpdateProductPage />
-          </PrivateRoute>
-        ),
-      },
+      { path: "/product/:id", element: <ProductDetailsPage /> },
     ],
+  },
+
+  // Dashboard section
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
+    // children: [
+    //   { index: true, element: <Overview /> },
+    //   {
+    //     path: "addProduct",
+    //     element: (
+    //       <PrivateRoute>
+    //         <AddProductPage />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+    //   {
+    //     path: "myProduct",
+    //     element: (
+    //       <PrivateRoute>
+    //         <MyProductPage />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+    //   {
+    //     path: "updateProduct/:id",
+    //     element: (
+    //       <PrivateRoute>
+    //         <UpdateProductPage />
+    //       </PrivateRoute>
+    //     ),
+    //   },
+    // ],
   },
 ]);
 export default router;

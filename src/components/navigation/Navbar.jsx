@@ -58,8 +58,6 @@ const Navbar = () => {
         { path: "/categories", label: "Categories" },
         { path: "/allProduct", label: "All products" },
         { path: "/dashboard", label: "Dashboard" },
-        { path: "/addProduct", label: "Add product" },
-        { path: "/myProduct", label: "My products" },
         { path: "/about-us", label: "About Us" },
         { path: "/contact", label: "Contact" },
       ];

@@ -19,7 +19,7 @@ const Profile = ({ user }) => {
         <div
           tabIndex={0}
           role="button"
-          className="btn btn-circle avatar shadow-none"
+          className="btn btn-circle avatar shadow-none border-none"
         >
           <div className="w-10 rounded-full border-2 border-primary overflow-hidden">
             <img
@@ -36,7 +36,7 @@ const Profile = ({ user }) => {
         {/* Sign Out Button */}
         <button
           onClick={handleSignOut}
-          className="bg-secondary btn text-base-100 hidden sm:inline-flex"
+          className="bg-secondary btn text-base-100 hidden sm:inline-flex border-none shadow-none"
         >
           Sign Out
         </button>

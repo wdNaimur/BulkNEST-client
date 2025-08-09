@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { motion, useInView } from "framer-motion";
 import { AuthContext } from "../../context/AuthContext";
 import ErrorText from "../../components/common/ErrorText";
+import { saveUserInDB } from "../../api/utils";
 
 const SignInPage = () => {
   const { userSignIn, googleSignIn, user } = useContext(AuthContext);
@@ -42,34 +43,45 @@ const SignInPage = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-
-    userSignIn(email, password)
-      .then((userCredential) => {
-        setFromPrivateRoute(false);
-        toast.success("Login Successful");
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        setError(errorCode);
-        toast.error("Login Failed");
-      });
+    try {
+      const result = await userSignIn(email, password);
+      setFromPrivateRoute(false);
+      const userData = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL,
+      };
+      //update user data in database
+      await saveUserInDB(userData);
+      toast.success("Login Successful");
+      navigate(from, { replace: true });
+    } catch (error) {
+      const errorCode = error.code;
+      setError(errorCode);
+      toast.error("Login Failed");
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((res) => {
-        setFromPrivateRoute(false);
-        toast.success("Login Successful");
-        navigate(from, { replace: true });
-      })
-      .catch(() => {
-        toast.error("Login Failed");
-      });
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleSignIn();
+      setFromPrivateRoute(false);
+      const userData = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL,
+      };
+      //update user data in database
+      await saveUserInDB(userData);
+      toast.success("Login Successful");
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast.error("Login Failed");
+    }
   };
 
   return (

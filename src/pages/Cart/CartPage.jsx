@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { AuthContext } from "../../context/AuthContext";
 import LoaderDataFetch from "../../components/common/LoaderDataFetch";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import OrderTable from "../../components/orders/OrderTable";
 
 const CartPage = () => {
   useEffect(() => {

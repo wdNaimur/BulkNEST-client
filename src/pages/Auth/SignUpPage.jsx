@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { motion, useInView } from "framer-motion";
 import ErrorText from "../../components/common/ErrorText";
 import { AuthContext } from "../../context/AuthContext";
+import { saveUserInDB } from "../../api/utils";
 
 const SignUpPage = () => {
   const { createUser, setUser, updateUser, googleSignIn, user } =
@@ -41,7 +42,7 @@ const SignUpPage = () => {
     };
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -78,38 +79,52 @@ const SignUpPage = () => {
       setConfirmPasswordError("");
     }
 
-    createUser(email, password)
-      .then((res) => {
-        const user = res.user;
-        updateUser({
+    try {
+      const res = await createUser(email, password);
+      const user = res.user;
+
+      try {
+        await updateUser({
           displayName: name,
           photoURL: url,
-        })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: url });
-            toast.success("Successfully Created Account!");
-            setShowPasswordRules(false); // hide password rules after success
-            navigate(from);
-          })
-          .catch(() => {
-            setUser(user);
-            toast.error("Failed to Create Account!");
-          });
-      })
-      .catch(() => {
-        toast.error("Failed to Create Account!");
-      });
+        });
+        setUser({ ...user, displayName: name, photoURL: url });
+
+        // for backend database
+        const userData = {
+          name: name,
+          email: email,
+          image: url,
+        };
+        // Save user data in database
+        await saveUserInDB(userData);
+        toast.success("Successfully Created Account!");
+        setShowPasswordRules(false);
+        navigate(from);
+      } catch (updateError) {
+        setUser(user);
+        toast.error("Failed to update user profile!");
+      }
+    } catch (createError) {
+      toast.error("Failed to Create Account!");
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((res) => {
-        toast.success("Successfully Created Account!");
-        navigate(from);
-      })
-      .catch(() => {
-        toast.error("Failed to Create Account!");
-      });
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleSignIn();
+      const userData = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL,
+      };
+      //update user data in database
+      await saveUserInDB(userData);
+      toast.success("Successfully Created Account!");
+      navigate(from);
+    } catch (error) {
+      toast.error("Failed to Create Account!");
+    }
   };
 
   const passwordChecks = validatePassword(passwordInput);
