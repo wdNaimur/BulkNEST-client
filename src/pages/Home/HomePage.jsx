@@ -3,6 +3,7 @@ import Banner from "../../components/home/Banner";
 import HowItWorks from "../../components/home/HowItWorks";
 import FeaturedCategoriesSection from "../../components/products/FeaturedCategoriesSection";
 import FAQSection from "../../components/home/FAQSection";
+import Testimonial from "../../components/home/Testimonial";
 
 const HomePage = () => {
   useEffect(() => {
@@ -20,6 +21,9 @@ const HomePage = () => {
       </section>
       <section>
         <FeaturedCategoriesSection />
+      </section>
+      <section>
+        <Testimonial />
       </section>
       <section>
         <FAQSection />

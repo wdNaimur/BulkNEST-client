@@ -1,0 +1,9 @@
+/* Custom bullet style */
+.swiper-pagination-bullet {
+  background-color: var(--color-primary);
+}
+
+/* Active bullet */
+.swiper-pagination-bullet-active {
+  background-color: var(--color-primary);
+}
