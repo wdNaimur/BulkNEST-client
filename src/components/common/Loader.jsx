@@ -26,14 +26,14 @@ const Loader = () => {
   }, [controls]);
 
   return (
-    <div className="h-screen flex justify-center pt-[30vh] bg-primary">
-      <div className="relative flex items-baseline text-6xl font-black font-unbounded text-secondary/20">
+    <div className="h-screen flex justify-center pt-[30vh] bg-transparent">
+      <div className="relative flex items-baseline text-6xl font-black font-unbounded text-primary/20">
         {/* Base text */}
         <span className="select-none uppercase">Loading</span>
 
         {/* Animated fill */}
         <motion.span
-          className="absolute top-0 left-0 text-secondary uppercase"
+          className="absolute top-0 left-0 text-primary uppercase"
           style={{ clipPath: "inset(0 100% 0 0)" }}
           animate={controls}
         >

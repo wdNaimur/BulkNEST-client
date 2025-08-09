@@ -26,7 +26,7 @@ const LoaderDataFetch = () => {
   }, [controls]);
 
   return (
-    <div className="h-full flex justify-center lg:pt-[calc(30vh-65px)] pt-[calc(30vh-64px)] lg:pb-[calc(30vh-65px)] pb-[calc(30vh-64px)] bg-base-200">
+    <div className="h-full flex justify-center lg:pt-[calc(30vh-65px)] pt-[calc(30vh-64px)] lg:pb-[calc(30vh-65px)] pb-[calc(30vh-64px)] bg-transparent">
       <div className="relative flex items-baseline text-6xl font-black font-unbounded text-primary/20">
         {/* Base text */}
         <span className="select-none uppercase">Loading</span>

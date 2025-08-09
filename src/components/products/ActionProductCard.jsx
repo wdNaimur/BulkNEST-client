@@ -104,7 +104,7 @@ const ActionProductCard = ({ product, setProducts }) => {
 
           <Link
             data-tooltip-id="edit"
-            to={`/updateProduct/${_id}`}
+            to={`/dashboard/update-product/${_id}`}
             className="btn btn-circle bg-base-200 border-none opacity-60 hover:opacity-100 shadow-sm transition-all hover:shadow-lg hover:scale-105 absolute top-2 right-2 text-lg text-secondary"
           >
             <MdEdit />

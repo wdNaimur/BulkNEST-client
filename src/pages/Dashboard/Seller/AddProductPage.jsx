@@ -49,11 +49,7 @@ const AddProductPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">
-        <h2 className="text-4xl font-bold text-primary">Add Product</h2>
-        <p className="opacity-70">Fill in the product details below.</p>
-      </div>
+    <div className="container mx-auto p-4">
       <motion.form
         ref={ref}
         initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
@@ -64,7 +60,7 @@ const AddProductPage = () => {
         }
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         onSubmit={handleAddProduct}
-        className="bg-base-100 p-4 rounded-box mt-8 space-y-6 shadow-md shadow-primary/10 border border-primary/5"
+        className="bg-base-200 p-4 rounded-box space-y-6 shadow-lg shadow-primary/10 border border-primary/5"
       >
         <div className="grid md:grid-cols-2 gap-6">
           <div className="form-control w-full">

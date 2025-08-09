@@ -2,6 +2,7 @@ import React from "react";
 import toast from "react-hot-toast";
 
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router";
 
 const Profile = ({ user }) => {
   const { userSignOut } = React.useContext(AuthContext);
@@ -14,11 +15,10 @@ const Profile = ({ user }) => {
 
   return (
     <div>
-      <div className="dropdown dropdown-end flex gap-2 items-center relative">
+      <div className="flex gap-2 items-center">
         {/* Avatar with mouse events */}
-        <div
-          tabIndex={0}
-          role="button"
+        <Link
+          to={`/dashboard/profile`}
           className="btn btn-circle avatar shadow-none border-none"
         >
           <div className="w-10 rounded-full border-2 border-primary overflow-hidden">
@@ -31,7 +31,7 @@ const Profile = ({ user }) => {
               }
             />
           </div>
-        </div>
+        </Link>
 
         {/* Sign Out Button */}
         <button

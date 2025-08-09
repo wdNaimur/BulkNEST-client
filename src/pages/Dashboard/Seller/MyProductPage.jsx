@@ -31,12 +31,8 @@ const MyProductPage = () => {
     return <LoaderDataFetch />;
   }
   return (
-    <section className="container mx-auto px-4 py-10">
-      <div className="bg-base-100 p-10 rounded-box space-y-4 text-center mb-8">
-        <h2 className="text-4xl font-bold text-primary">My Products</h2>
-        <p className="opacity-70">Explore your added products.</p>
-      </div>
-
+    <section className="container mx-auto p-4">
+      <div>Search Box and filter</div>
       <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
         {products.length ? (
           products.map((product) => (

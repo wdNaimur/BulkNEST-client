@@ -75,7 +75,7 @@ const Navbar = () => {
   ));
 
   return (
-    <nav className="fixed bg-base-100/60 top-0 left-0 w-full z-50 my-auto p-0 font-outfit backdrop-blur-sm">
+    <nav className="fixed bg-base-100/70 top-0 left-0 w-full z-50 my-auto p-0 font-outfit backdrop-blur-xl">
       <div className="container mx-auto">
         <div className="navbar border-none text-primary lg:px-4 px-2">
           <div className="navbar-start">

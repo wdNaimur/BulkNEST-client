@@ -11,11 +11,11 @@ import AllProductsPage from "../pages/Products/AllProductsPage";
 import CartPage from "../pages/Cart/CartPage";
 import ProductDetailsPage from "../pages/Products/ProductDetailsPage";
 import DashBoardLayout from "../layouts/DashBoardLayout";
-// import MyProductPage from "../pages/Dashboard/Seller/MyProductPage";
-// import AddProductPage from "../pages/Dashboard/Seller/AddProductPage";
-// import UpdateProductPage from "../pages/Dashboard/Seller/UpdateProductPage";
-
-// import Overview from "../pages/Dashboard/Overview/Overview";
+import MyProductPage from "../pages/Dashboard/Seller/MyProductPage";
+import AddProductPage from "../pages/Dashboard/Seller/AddProductPage";
+import UpdateProductPage from "../pages/Dashboard/Seller/UpdateProductPage";
+import Overview from "../pages/Dashboard/Overview/Overview";
+import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
 
 const router = createBrowserRouter([
   //Home Section
@@ -50,33 +50,41 @@ const router = createBrowserRouter([
         <DashBoardLayout />
       </PrivateRoute>
     ),
-    // children: [
-    //   { index: true, element: <Overview /> },
-    //   {
-    //     path: "addProduct",
-    //     element: (
-    //       <PrivateRoute>
-    //         <AddProductPage />
-    //       </PrivateRoute>
-    //     ),
-    //   },
-    //   {
-    //     path: "myProduct",
-    //     element: (
-    //       <PrivateRoute>
-    //         <MyProductPage />
-    //       </PrivateRoute>
-    //     ),
-    //   },
-    //   {
-    //     path: "updateProduct/:id",
-    //     element: (
-    //       <PrivateRoute>
-    //         <UpdateProductPage />
-    //       </PrivateRoute>
-    //     ),
-    //   },
-    // ],
+    children: [
+      { index: true, element: <Overview /> },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <ProfilePage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-product",
+        element: (
+          <PrivateRoute>
+            <AddProductPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-products",
+        element: (
+          <PrivateRoute>
+            <MyProductPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-product/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProductPage />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 export default router;
