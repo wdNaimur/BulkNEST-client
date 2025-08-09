@@ -50,13 +50,18 @@ const Navbar = () => {
         { path: "/", label: "Home" },
         { path: "/categories", label: "Categories" },
         { path: "/allProduct", label: "All products" },
+        { path: "/about-us", label: "About Us" },
+        { path: "/contact", label: "Contact" },
       ]
     : [
         { path: "/", label: "Home" },
         { path: "/categories", label: "Categories" },
         { path: "/allProduct", label: "All products" },
+        { path: "/Dashboard", label: "Dashboard" },
         { path: "/addProduct", label: "Add product" },
         { path: "/myProduct", label: "My products" },
+        { path: "/about-us", label: "About Us" },
+        { path: "/contact", label: "Contact" },
       ];
 
   const navLinks = links.map((link) => (
@@ -72,7 +77,7 @@ const Navbar = () => {
   ));
 
   return (
-    <nav className="fixed bg-base-100 top-0 left-0 w-full z-50 my-auto p-0 font-outfit">
+    <nav className="fixed bg-base-100/60 top-0 left-0 w-full z-50 my-auto p-0 font-outfit backdrop-blur-sm">
       <div className="container mx-auto">
         <div className="navbar border-none text-primary lg:px-4 px-2">
           <div className="navbar-start">
