@@ -20,6 +20,8 @@ import OrderPage from "../pages/Dashboard/Seller/OrderPage";
 import AboutUsPage from "../pages/AboutUs/AboutUsPage";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import CustomerOrderHistory from "../pages/Dashboard/Customer/CustomerOrderHistory";
+import AllUsers from "../pages/Dashboard/Admin/AllUsers";
+import AllProducts from "../pages/Dashboard/Admin/AllProducts";
 
 const router = createBrowserRouter([
   //Home Section
@@ -103,6 +105,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CustomerOrderHistory />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <PrivateRoute>
+            <AllUsers />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "all-products",
+        element: (
+          <PrivateRoute>
+            <AllProducts />
           </PrivateRoute>
         ),
       },
