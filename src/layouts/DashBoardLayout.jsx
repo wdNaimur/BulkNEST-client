@@ -61,7 +61,7 @@ const DashBoardLayout = () => {
       <div className="lg:block hidden">
         <DashboardSideMenu />
       </div>
-      <main className="min-h-screen bg-base-100 lg:pl-96 pt-[70px] lg:pt-0">
+      <main className="min-h-screen bg-base-100 lg:pl-96 pt-[55px] lg:pt-0">
         <section className="p-6">
           {state === "loading" ? <Loader /> : <Outlet />}
         </section>

@@ -31,12 +31,12 @@ const ProfileDetails = () => {
   };
 
   return (
-    <div className="card w-full shadow-lg shadow-primary/10  container px-4 mx-auto bg-base-200 relative font-outfit">
+    <div className="card w-full shadow-lg shadow-primary/10 mx-auto bg-base-200 relative font-outfit">
       <figure className="px-8 pt-8">
         <img
           src={user.photoURL}
           alt={user.displayName}
-          className="rounded-full w-32 h-32 object-cover"
+          className="rounded-full w-32 h-32 object-cover bg-primary/20"
         />
       </figure>
       <div className="card-body items-center text-center">

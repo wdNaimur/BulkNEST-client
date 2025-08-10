@@ -3,6 +3,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import ProfileDetails from "../../../components/profile/ProfileDetails";
 import Loader from "../../../components/common/Loader";
 import useRole from "../../../hooks/useRole";
+import DashboardHeading from "../../../components/common/DashboardHeading";
 
 const ProfilePage = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const ProfilePage = () => {
   }
   return (
     <div className="flex flex-col">
+      <DashboardHeading title={`Profile`} />
       <main className="flex-1">
         <ProfileDetails />
       </main>

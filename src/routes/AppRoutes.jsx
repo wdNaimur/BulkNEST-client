@@ -19,6 +19,7 @@ import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
 import OrderPage from "../pages/Dashboard/Seller/OrderPage";
 import AboutUsPage from "../pages/AboutUs/AboutUsPage";
 import ContactUs from "../pages/ContactUs/ContactUs";
+import CustomerOrderHistory from "../pages/Dashboard/Customer/CustomerOrderHistory";
 
 const router = createBrowserRouter([
   //Home Section
@@ -94,6 +95,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <OrderPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "order-history",
+        element: (
+          <PrivateRoute>
+            <CustomerOrderHistory />
           </PrivateRoute>
         ),
       },
