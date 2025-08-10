@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import DashboardHeading from "../../../components/common/DashboardHeading";
 
 const AdminOverview = () => {
   // Static data for admin overview chart (e.g., new users per month)
@@ -24,31 +25,30 @@ const AdminOverview = () => {
   return (
     <div className="p-6 space-y-6">
       {/* Page Title */}
-      <h1 className="text-2xl font-bold text-gray-800">Admin Overview</h1>
-
+      <DashboardHeading title={`Dashboard Overview`} />
       {/* Info Boxes */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white shadow rounded-xl p-5">
-          <p className="text-gray-500">Total Users</p>
+        <div className="bg-base-200 shadow rounded-xl p-5">
+          <p className="text-secondary/60">Total Users</p>
           <h2 className="text-2xl font-bold mt-2">2,350</h2>
         </div>
-        <div className="bg-white shadow rounded-xl p-5">
-          <p className="text-gray-500">Total Sellers</p>
+        <div className="bg-base-200 shadow rounded-xl p-5">
+          <p className="text-secondary/60">Total Sellers</p>
           <h2 className="text-2xl font-bold mt-2">520</h2>
         </div>
-        <div className="bg-white shadow rounded-xl p-5">
-          <p className="text-gray-500">Total Orders</p>
+        <div className="bg-base-200 shadow rounded-xl p-5">
+          <p className="text-secondary/60">Total Orders</p>
           <h2 className="text-2xl font-bold mt-2">12,780</h2>
         </div>
-        <div className="bg-white shadow rounded-xl p-5">
-          <p className="text-gray-500">Pending Approvals</p>
+        <div className="bg-base-200 shadow rounded-xl p-5">
+          <p className="text-secondary/60">Pending Approvals</p>
           <h2 className="text-2xl font-bold mt-2">34</h2>
         </div>
       </div>
 
       {/* Chart Section */}
-      <div className="bg-white shadow rounded-xl p-5">
-        <p className="text-gray-500 mb-4">User Growth (Monthly)</p>
+      <div className="bg-base-200 shadow rounded-xl p-5">
+        <p className="text-secondary/60 mb-4">User Growth (Monthly)</p>
         <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={userGrowthData}>

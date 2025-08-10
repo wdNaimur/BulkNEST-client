@@ -1,4 +1,5 @@
 import React from "react";
+import DashboardHeading from "../../../components/common/DashboardHeading";
 
 const AllProducts = () => {
   // Sample static product data
@@ -46,12 +47,12 @@ const AllProducts = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">All Products</h1>
+      <DashboardHeading title={`All Products`}></DashboardHeading>
 
-      <div className="bg-white shadow rounded-xl overflow-x-auto">
+      <div className="bg-base-200 shadow rounded-xl overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-gray-100 text-gray-700">
+            <tr className="bg-base-100 text-secondary/80">
               <th className="py-3 px-4 border-b">Product ID</th>
               <th className="py-3 px-4 border-b">Product Name</th>
               <th className="py-3 px-4 border-b">Seller</th>
@@ -64,31 +65,29 @@ const AllProducts = () => {
 
           <tbody>
             {products.map((product) => (
-              <tr key={product.id} className="hover:bg-gray-50">
+              <tr key={product.id} className="hover:bg-base-200">
                 <td className="py-3 px-4 border-b">{product.id}</td>
                 <td className="py-3 px-4 border-b">{product.name}</td>
                 <td className="py-3 px-4 border-b">{product.seller}</td>
                 <td className="py-3 px-4 border-b">{product.price}</td>
                 <td className="py-3 px-4 border-b">{product.stock}</td>
-                <td className="py-3 px-4 border-b">
+                <td className="py-3 px-4 border-b min-w-44">
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
                       statusStyles[product.status] ||
-                      "bg-gray-100 text-gray-700"
+                      "bg-base-100 text-secondary/80"
                     }`}
                   >
                     {product.status}
                   </span>
                 </td>
-                <td className="py-3 px-4 border-b space-x-2">
-                  <button className="text-blue-600 hover:underline">
-                    Edit
-                  </button>
-                  <button className="text-red-600 hover:underline">
+                <td className="py-3 px-4 border-b space-x-2 min-w-52">
+                  <button className="text-primary hover:underline">Edit</button>
+                  <button className="text-primary hover:underline">
                     Delete
                   </button>
                   {product.status === "Pending Approval" && (
-                    <button className="text-green-600 hover:underline">
+                    <button className="text-primary hover:underline">
                       Approve
                     </button>
                   )}

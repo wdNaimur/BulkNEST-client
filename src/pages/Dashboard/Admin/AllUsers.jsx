@@ -36,36 +36,51 @@ const AllUsers = () => {
   // Function to get badge color based on status
   const statusStyles = {
     Active: "bg-green-100 text-green-700",
-    Inactive: "bg-gray-100 text-gray-700",
+    Inactive: "bg-base-100 text-secondary/80",
     Pending: "bg-yellow-100 text-yellow-700",
   };
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">All Users</h1>
+      <h1 className="text-2xl font-bold text-secondary mb-6">All Users</h1>
 
-      <div className="bg-white shadow rounded-xl overflow-x-auto">
+      <div className="bg-base-200 shadow rounded-xl overflow-x-auto">
         <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-gray-100 text-gray-700">
-              <th className="py-3 px-4 border-b">User ID</th>
-              <th className="py-3 px-4 border-b">Name</th>
-              <th className="py-3 px-4 border-b">Email</th>
-              <th className="py-3 px-4 border-b">Role</th>
-              <th className="py-3 px-4 border-b">Status</th>
+          <thead className="bg-primary text-base-100">
+            <tr>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                User ID
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">Name</th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Email
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">Role</th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-50">
-                <td className="py-3 px-4 border-b">{user.id}</td>
-                <td className="py-3 px-4 border-b">{user.name}</td>
-                <td className="py-3 px-4 border-b">{user.email}</td>
-                <td className="py-3 px-4 border-b">{user.role}</td>
-                <td className="py-3 px-4 border-b">
+              <tr key={user.id} className="hover:bg-base-100">
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {user.id}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {user.name}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {user.email}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {user.role}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      statusStyles[user.status] || "bg-gray-100 text-gray-700"
+                      statusStyles[user.status] ||
+                      "bg-base-100 text-secondary/80"
                     }`}
                   >
                     {user.status}
