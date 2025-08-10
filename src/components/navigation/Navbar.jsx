@@ -123,7 +123,7 @@ const Navbar = () => {
                         <Link
                           onClick={handleNavClick}
                           to="/signIn"
-                          className="btn btn-primary text-white btn-wide"
+                          className="btn btn-primary text-white btn-wide shadow-none border-none"
                         >
                           Sign In
                         </Link>
@@ -196,7 +196,7 @@ const Navbar = () => {
                 <Profile user={user} />
               ) : (
                 <Link className="hidden sm:inline-flex" to="/signIn">
-                  <button className="btn btn-primary text-white">
+                  <button className="btn btn-primary text-white shadow-none border-none">
                     Sign In
                   </button>
                 </Link>

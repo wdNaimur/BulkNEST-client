@@ -155,7 +155,7 @@ const SignInPage = () => {
 
               <button
                 type="submit"
-                className="btn btn-secondary mt-4 text-base-100"
+                className="btn btn-secondary mt-4 text-base-100 shadow-none border-none"
               >
                 Sign In
               </button>

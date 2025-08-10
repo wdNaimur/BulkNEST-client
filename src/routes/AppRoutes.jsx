@@ -16,6 +16,9 @@ import AddProductPage from "../pages/Dashboard/Seller/AddProductPage";
 import UpdateProductPage from "../pages/Dashboard/Seller/UpdateProductPage";
 import Overview from "../pages/Dashboard/Overview/Overview";
 import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
+import OrderPage from "../pages/Dashboard/Seller/OrderPage";
+import AboutUsPage from "../pages/AboutUs/AboutUsPage";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   //Home Section
@@ -39,6 +42,8 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/product/:id", element: <ProductDetailsPage /> },
+      { path: "/about-us", element: <AboutUsPage /> },
+      { path: "/contact", element: <ContactUs /> },
     ],
   },
 
@@ -81,6 +86,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UpdateProductPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <PrivateRoute>
+            <OrderPage />
           </PrivateRoute>
         ),
       },

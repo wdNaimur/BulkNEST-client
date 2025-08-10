@@ -32,40 +32,42 @@ const CartPage = () => {
   }
   return (
     <section className="container mx-auto px-4 py-10">
-      <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">
-        <h2 className="text-4xl font-bold text-primary">My Cart</h2>
-        <p className="opacity-70">products I have bought.</p>
-      </div>
       {allOrder.length ? (
-        <div className="overflow-x-scroll rounded-box my-10 mx-auto">
-          <table className="table table-auto bg-base-100 mx-auto">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th className="text-center">Buying Date</th>
-                {/* hidden lg:table-cell */}
-                <th className="text-center">Quantity</th>
-                {/*hidden sm:table-cell */}
-                <th className="text-center">Total Price</th>
-                {/*hidden sm:table-cell */}
-                <th className="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <AnimatePresence>
-                {allOrder.map((order, index) => (
-                  <OrderTable
-                    key={order._id}
-                    order={order}
-                    allOrder={allOrder}
-                    setAllOrder={setAllOrder}
-                    index={index}
-                  />
-                ))}
-              </AnimatePresence>
-            </tbody>
-          </table>
-        </div>
+        <>
+          <div className="bg-base-100 p-10 rounded-box space-y-4 text-center">
+            <h2 className="text-4xl font-bold text-primary">My Cart</h2>
+            <p className="opacity-70">products I have bought.</p>
+          </div>
+          <div className="overflow-x-scroll rounded-box my-10 mx-auto">
+            <table className="table table-auto bg-base-100 mx-auto">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th className="text-center">Buying Date</th>
+                  {/* hidden lg:table-cell */}
+                  <th className="text-center">Quantity</th>
+                  {/*hidden sm:table-cell */}
+                  <th className="text-center">Total Price</th>
+                  {/*hidden sm:table-cell */}
+                  <th className="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <AnimatePresence>
+                  {allOrder.map((order, index) => (
+                    <OrderTable
+                      key={order._id}
+                      order={order}
+                      allOrder={allOrder}
+                      setAllOrder={setAllOrder}
+                      index={index}
+                    />
+                  ))}
+                </AnimatePresence>
+              </tbody>
+            </table>
+          </div>
+        </>
       ) : (
         <div className="font-poppins col-span-full ">
           <div className="p-10 space-y-2 my-10 rounded-box bg-base-100">

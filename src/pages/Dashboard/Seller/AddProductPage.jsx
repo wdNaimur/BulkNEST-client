@@ -28,7 +28,7 @@ const AddProductPage = () => {
     productData.main_quantity = parseInt(productData.main_quantity);
     productData.min_sell_quantity = parseInt(productData.min_sell_quantity);
     productData.rating = parseInt(productData.rating);
-    productData.userEmail = user.email;
+    productData.sellerEmail = user.email;
     productData.review = [];
 
     axiosSecure
@@ -37,7 +37,7 @@ const AddProductPage = () => {
         if (res.data.insertedId) {
           toast.success("Product Added Successfully!");
           form.reset();
-          navigate(`/myProduct`);
+          navigate(`/dashboard/my-products`);
         } else {
           toast.error("Failed to add product.");
         }

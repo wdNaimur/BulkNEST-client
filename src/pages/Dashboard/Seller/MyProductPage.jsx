@@ -32,7 +32,6 @@ const MyProductPage = () => {
   }
   return (
     <section className="container mx-auto p-4">
-      <div>Search Box and filter</div>
       <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-5 w-full">
         {products.length ? (
           products.map((product) => (
@@ -54,7 +53,7 @@ const MyProductPage = () => {
               </p>
               <div className="flex items-center justify-center p-3">
                 <Link
-                  to="/addProduct"
+                  to="/dashboard/add-product"
                   className="btn btn-primary text-base-200 "
                 >
                   Add Your First Product

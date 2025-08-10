@@ -22,7 +22,7 @@ const DashBoardLayout = () => {
   }
 
   return (
-    <section className="font-poppins min-h-screen max-w-screen relative">
+    <section className="min-h-screen max-w-screen relative font-outfit">
       {/* Drawer for mobile responsive  */}
       <div className="fixed bg-base-200 top-0 shadow-xl shadow-primary/5 left-0 w-full z-50 my-auto select-none">
         <div className="drawer lg:hidden block px-4 mx-auto h-[50px]">
