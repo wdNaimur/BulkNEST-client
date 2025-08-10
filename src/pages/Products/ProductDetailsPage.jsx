@@ -83,7 +83,7 @@ const ProductDetailsPage = () => {
     const orderInfo = {
       productId: product._id,
       quantity,
-      orderedFrom: user.email,
+      orderedFrom: user?.email,
       buyerDetails: {
         buyerName: form.fullName.value,
         buyerEmail: form.email.value,
@@ -93,7 +93,7 @@ const ProductDetailsPage = () => {
     };
 
     axiosSecure
-      .post(`/orders/${user.email}`, orderInfo)
+      .post(`/orders/${user?.email}`, orderInfo)
       .then((res) => {
         if (res?.data?.success) {
           setOrderLoading(false);
@@ -246,7 +246,7 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Buy Button */}
-          {user.email === sellerEmail ? (
+          {user?.email === sellerEmail ? (
             <p className="opacity-50">you can not buy your own products</p>
           ) : (
             <div className="mt-4">
