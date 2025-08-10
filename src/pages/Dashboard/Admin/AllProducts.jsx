@@ -52,26 +52,50 @@ const AllProducts = () => {
       <div className="bg-base-200 shadow rounded-xl overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-base-100 text-secondary/80">
-              <th className="py-3 px-4 border-b">Product ID</th>
-              <th className="py-3 px-4 border-b">Product Name</th>
-              <th className="py-3 px-4 border-b">Seller</th>
-              <th className="py-3 px-4 border-b">Price</th>
-              <th className="py-3 px-4 border-b">Stock</th>
-              <th className="py-3 px-4 border-b">Status</th>
-              <th className="py-3 px-4 border-b">Actions</th>
+            <tr className="bg-primary text-base-100">
+              <th className="py-3 px-4 border-b border-b-secondary/10 min-w-28">
+                Product ID
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10 min-w-36">
+                Product Name
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Seller
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Price
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Stock
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Status
+              </th>
+              <th className="py-3 px-4 border-b border-b-secondary/10">
+                Actions
+              </th>
             </tr>
           </thead>
 
           <tbody>
             {products.map((product) => (
               <tr key={product.id} className="hover:bg-base-200">
-                <td className="py-3 px-4 border-b">{product.id}</td>
-                <td className="py-3 px-4 border-b">{product.name}</td>
-                <td className="py-3 px-4 border-b">{product.seller}</td>
-                <td className="py-3 px-4 border-b">{product.price}</td>
-                <td className="py-3 px-4 border-b">{product.stock}</td>
-                <td className="py-3 px-4 border-b min-w-44">
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {product.id}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {product.name}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {product.seller}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {product.price}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10">
+                  {product.stock}
+                </td>
+                <td className="py-3 px-4 border-b border-b-secondary/10 min-w-44">
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
                       statusStyles[product.status] ||
@@ -81,7 +105,7 @@ const AllProducts = () => {
                     {product.status}
                   </span>
                 </td>
-                <td className="py-3 px-4 border-b space-x-2 min-w-52">
+                <td className="py-3 px-4 border-b border-b-secondary/10 space-x-2 min-w-52">
                   <button className="text-primary hover:underline">Edit</button>
                   <button className="text-primary hover:underline">
                     Delete
